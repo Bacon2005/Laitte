@@ -84,17 +84,17 @@
                         <Image url="@../Images/Blur%20Layer.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="513.0" fitWidth="469.0" layoutX="614.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="77.10494995117188" AnchorPane.leftAnchor="614.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="184.0">
+                  <ImageView fitHeight="533.0" fitWidth="561.0" layoutX="553.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="553.0" AnchorPane.rightAnchor="49.26995849609375" AnchorPane.topAnchor="124.0">
                      <image>
                         <Image url="@../Images/Coffee%20Cup.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="131.0" layoutY="112.0" prefHeight="64.0" prefWidth="515.0" styleClass="TopBottom-text" text="LIFE TASTES" textFill="WHITE">
+                  <Label layoutX="131.0" layoutY="112.0" prefHeight="141.0" prefWidth="617.0" styleClass="TopBottom-text" text="LIFE TASTES" textFill="WHITE">
                      <font>
-                        <Font size="82.0" />
+                        <Font size="96.0" />
                      </font>
                   </Label>
-                  <Label layoutX="217.0" layoutY="212.0" prefHeight="100.0" prefWidth="599.0" styleClass="middle-text" text="BETTER WITH" textFill="WHITE">
+                  <Label layoutX="237.0" layoutY="215.0" prefHeight="141.0" prefWidth="699.0" styleClass="middle-text" text="BETTER WITH" textFill="WHITE">
                      <font>
                         <Font name="Inter 28pt ExtraBold Italic" size="82.0" />
                      </font>
@@ -107,6 +107,11 @@
                </children></AnchorPane>
          </center>
       </BorderPane>
+      <ImageView fitHeight="546.0" fitWidth="501.0" layoutX="-26.0" layoutY="-95.0" pickOnBounds="true" preserveRatio="true" rotate="82.6" AnchorPane.topAnchor="-95.0">
+         <image>
+            <Image url="@../Images/Leaves.png" />
+         </image>
+      </ImageView>
       <AnchorPane fx:id="slider" prefHeight="726.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -222,5 +227,10 @@
             </HBox>
          </children>
       </AnchorPane>
+      <ImageView fitHeight="546.0" fitWidth="501.0" layoutX="804.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" rotate="-60.3">
+         <image>
+            <Image url="@../Images/Leaves.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
