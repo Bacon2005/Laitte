@@ -89,17 +89,17 @@
                         <Image url="@../Images/Coffee%20Cup.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="131.0" layoutY="112.0" prefHeight="64.0" prefWidth="515.0" text="LIFE TASTES" textFill="WHITE">
+                  <Label layoutX="131.0" layoutY="112.0" prefHeight="64.0" prefWidth="515.0" styleClass="TopBottom-text" text="LIFE TASTES" textFill="WHITE">
+                     <font>
+                        <Font size="82.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="217.0" layoutY="212.0" prefHeight="100.0" prefWidth="599.0" styleClass="middle-text" text="BETTER WITH" textFill="WHITE">
                      <font>
                         <Font name="Inter 28pt ExtraBold Italic" size="82.0" />
                      </font>
                   </Label>
-                  <Label layoutX="217.0" layoutY="212.0" prefHeight="100.0" prefWidth="599.0" text="BETTER WITH" textFill="WHITE">
-                     <font>
-                        <Font name="Inter 28pt ExtraBold Italic" size="82.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="131.0" layoutY="312.0" prefHeight="100.0" prefWidth="599.0" text="LAITTE." textFill="WHITE">
+                  <Label layoutX="131.0" layoutY="312.0" prefHeight="100.0" prefWidth="599.0" styleClass="TopBottom-text" text="LAITTE." textFill="WHITE">
                      <font>
                         <Font name="Inter 28pt ExtraBold" size="96.0" />
                      </font>
