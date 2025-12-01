@@ -1,0 +1,24 @@
+/*Style Sheet for Inventory Scene */
+/* . is for specific item and hashtag is for the whole thing*/
+
+.m_inventory_add {
+    -fx-background-color: #3FB38E;
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+}
+
+.m_inventory_search_anchor {
+    -fx-background-color: linear-gradient(to right, #3D230E, #22B08B, #ABBF9A);
+    -fx-background-radius: 30;
+
+    -fx-text-fill: WHITE;
+}
+
+.m_inventory_search{
+
+    -fx-background-color: WHITE;
+    -fx-background-radius: 30;
+
+    -fx-text-fill: BLACK;
+    -fx-opacity: 0.5;
+}

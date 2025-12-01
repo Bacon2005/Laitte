@@ -12,38 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class HomepageController {
+public class InventoryController {
 
-    // --------------------------- Variables for FXML ----------------------------//
-
-    @FXML
-    Label nameLabel;
-
-    @FXML
-    Button logoutBtn;
-
-    @FXML
-    private Label Menu;
-
-    @FXML
-    private Label MenuClose;
-
-    @FXML
-    private Button analytics;
-
-    @FXML
-    private Button inventory;
-
-    @FXML
-    private AnchorPane rootPane;
-
-    @FXML
-    private AnchorPane slider;
-
-    @FXML
-    private ImageView profilePic;
-
-    // --------------------------------------------------------------------------//
 
     public void initialize() {
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
@@ -73,19 +43,47 @@ public class HomepageController {
         slider.setOnMouseExited(event -> slideOut.play());
     }
 
-    public void setUsername(String username) {
-        nameLabel.setText("Hello, " + username);
-    }
+    @FXML
+    private Button analytics;
 
     @FXML
-    private void logoutBtn(ActionEvent event) throws IOException {
-        SceneController.switchToLoginScene(event);
-    }
+    private Button home;
 
     @FXML
-    private void inventory(ActionEvent event) throws IOException {
-    SceneController.switchToInventory(event);
+    private Button inventory;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private Button menu;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Button orders;
+
+    @FXML
+    private ImageView profilePic;
+
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private Button settingBtn;
+
+    @FXML
+    private AnchorPane slider;
+
+    @FXML
+    void logoutBtn(ActionEvent event) {}
+
+
+    @FXML
+    private void home(ActionEvent event) throws IOException {
+    SceneController.switchToHomepage(event);
     }
 
     
-}   
+}

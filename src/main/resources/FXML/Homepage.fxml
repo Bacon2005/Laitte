@@ -166,7 +166,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventory" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
                      <font>
                         <Font size="16.0" />
                      </font>
