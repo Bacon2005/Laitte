@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class HomepageController {
+public class ManagerHomepageController {
 
     // --------------------------- Variables for FXML ----------------------------//
 
@@ -33,6 +33,9 @@ public class HomepageController {
 
     @FXML
     private Button inventory;
+
+    @FXML
+    private Button Accounts;
 
     @FXML
     private AnchorPane rootPane;
@@ -81,5 +84,10 @@ public class HomepageController {
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
+    }
+
+    @FXML
+    private void manageAccountsBtn(ActionEvent event) throws IOException {
+
     }
 }

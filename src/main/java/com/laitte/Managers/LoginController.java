@@ -7,19 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+import com.laitte.LaitteMain.Database;
+
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 
 public class LoginController implements Initializable {
@@ -29,10 +28,6 @@ public class LoginController implements Initializable {
     // ---------------------------------------------------------------------------//
 
     // --------------------------- Variables for FXML ----------------------------//
-
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     private CheckBox checkBox;
@@ -46,6 +41,8 @@ public class LoginController implements Initializable {
     private ImageView coffeeImage;
     @FXML
     private ImageView leavesImage;
+    @FXML
+    private AnchorPane invalid;
     // --------------------------------------------------------------------------//
 
     // --------------------------- Animation ----------------------------//
@@ -77,7 +74,7 @@ public class LoginController implements Initializable {
 
     public boolean validateLogin(String username, String password) {
 
-        String query = "SELECT * FROM \"Laitte\".\"users\" WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM \"public\".\"login\" WHERE username = ? AND password = ?";
 
         try (Connection conn = com.laitte.LaitteMain.Database.connect();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -99,26 +96,51 @@ public class LoginController implements Initializable {
         }
     }
 
+    public boolean isManager(String username) {
+        String query = """
+                SELECT er.isManager
+                FROM login l
+                JOIN employee e ON l.loginid = e.loginid
+                JOIN employeerole er ON e.roleid = er.roleid
+                WHERE l.username = ?
+                """;
+
+        try (Connection conn = Database.connect();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            // If found, return the boolean value directly
+            return rs.next() && rs.getBoolean("isManager");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // default if query fails
+        }
+    }
+
     public void loginBtn(ActionEvent event) throws IOException {
         username = usernameField.getText();
         password = passwordField.getText();
 
-        if (validateLogin(username, password)) {
-            System.out.println("Login successful!"); // Successful login message
+        if (validateLogin(username, password) && isManager(username)) {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Homepage.fxml")); // Load Homepage
-                                                                                               // FXML file
-            root = loader.load();
-            HomepageController homepageController = loader.getController();
-            homepageController.initialize(); // Pass username to HomepageController
-            homepageController.setUsername(username);
-            stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", controller -> {
+                ManagerHomepageController c = (ManagerHomepageController) controller;
+                c.setUsername(username);
+            });
+
+        } else if (validateLogin(username, password)) {
+
+            SceneController.switchScene(event, "/FXML/Homepage.fxml", controller -> {
+                HomepageController c = (HomepageController) controller;
+                c.setUsername(username);
+            });
 
         } else {
             System.out.println("Invalid credentials.");
+            invalid.setVisible(true);
         }
     }
 

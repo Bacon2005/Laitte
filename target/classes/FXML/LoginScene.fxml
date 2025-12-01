@@ -16,7 +16,7 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="loginBtn" layoutX="370.0" layoutY="320.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="44.0" prefWidth="109.0" style="-fx-background-color: FFE3C1; -fx-background-radius: 20;" text="Login">
+      <Button fx:id="loginBtn" layoutX="376.0" layoutY="332.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: FFE3C1; -fx-background-radius: 20;" text="Login">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -58,5 +58,11 @@
             <Image url="@../Images/Leaves.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="invalid" layoutX="321.0" layoutY="296.0" prefHeight="17.0" prefWidth="207.0" visible="false">
+         <children>
+            <TextField editable="false" prefHeight="0.0" prefWidth="208.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;" />
+            <Label layoutX="6.0" layoutY="4.0" prefHeight="17.0" prefWidth="194.0" text="Incorrect username or password." textFill="#e10000" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

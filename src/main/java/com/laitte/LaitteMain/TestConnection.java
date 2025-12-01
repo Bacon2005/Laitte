@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 public class TestConnection {
     public static void main(String[] args) {
         String username = "Admin";
-        String password = "1234";
+        String password = "CafeLaitte";
 
-        String query = "SELECT * FROM \"Laitte\".\"users\" WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM \"public\".\"login\" WHERE username = ? AND password = ?";
 
         try (Connection conn = Database.connect();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
