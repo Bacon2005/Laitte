@@ -38,4 +38,9 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void switchToLoginScene(ActionEvent event) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'switchToLoginScene'");
+    }
 }

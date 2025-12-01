@@ -78,12 +78,6 @@ public class InventoryController {
 
     @FXML
     void logoutBtn(ActionEvent event) {}
-
-
-    @FXML
-    private void home(ActionEvent event) throws IOException {
-    SceneController.switchToHomepage(event);
-    }
-
     
+
 }
