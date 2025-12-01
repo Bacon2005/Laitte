@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.HomepageController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.ManagerHomepageController">
    <children>
       <BorderPane layoutX="23.0" layoutY="42.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -104,10 +104,11 @@
                         <Font name="Inter 28pt ExtraBold" size="96.0" />
                      </font>
                   </Label>
-               </children></AnchorPane>
+               </children>
+            </AnchorPane>
          </center>
       </BorderPane>
-      <ImageView fitHeight="546.0" fitWidth="501.0" layoutX="-26.0" layoutY="-95.0" pickOnBounds="true" preserveRatio="true" rotate="82.6" AnchorPane.topAnchor="-95.0">
+      <ImageView fitHeight="546.0" fitWidth="501.0" layoutX="-46.0" layoutY="-102.0" pickOnBounds="true" preserveRatio="true" rotate="82.6" AnchorPane.topAnchor="-102.0">
          <image>
             <Image url="@../Images/Leaves.png" />
          </image>
@@ -171,7 +172,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventory" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -195,9 +196,21 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="Accounts" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text="Accounts">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/LogoCafe.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
-            <HBox layoutX="20.0" layoutY="585.0" prefHeight="65.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="585.0">
+            <HBox layoutX="20.0" layoutY="631.0" prefHeight="81.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="631.0">
                <children>
                   <Button fx:id="settingBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
                      <font>

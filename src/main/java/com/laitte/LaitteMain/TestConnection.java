@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 // Simple test class to verify database connection and login query
 public class TestConnection {
     public static void main(String[] args) {
-        String username = "admin";
-        String password = "1234";
+        String username = "Admin";
+        String password = "CafeLaitte";
 
-        String query = "SELECT * FROM \"Laitte\".\"users\" WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM \"public\".\"login\" WHERE username = ? AND password = ?";
 
         try (Connection conn = Database.connect();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
