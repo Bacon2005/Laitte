@@ -47,17 +47,19 @@ public class EmployeeDAO {
 
     public static void setManager(int employeeID, boolean isManager) {
         String query = """
-                UPDATE employeerole SET ismanager = ?
-                WHERE roleid =
-                (SELECT roleid FROM employee WHERE employeeid = ?)
+                UPDATE employeerole
+                SET ismanager = ?, rolename = ?
+                WHERE roleid = (SELECT roleid FROM employee WHERE employeeid = ?)
                 """;
+
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setBoolean(1, isManager);
-            pstmt.setInt(2, employeeID);
-            int rows = pstmt.executeUpdate();
 
+            pstmt.setBoolean(1, isManager);
+            pstmt.setString(2, isManager ? "Manager" : "Worker");
+            pstmt.setInt(3, employeeID);
+
+            int rows = pstmt.executeUpdate();
             System.out.println("Rows updated: " + rows);
 
         } catch (SQLException e) {

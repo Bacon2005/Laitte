@@ -7,10 +7,12 @@ import com.laitte.Managers.Employees.Employee;
 import com.laitte.Managers.Employees.EmployeeDAO;
 import com.laitte.Managers.Employees.EmployeePaneController;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -20,6 +22,8 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class AccountsController {
 
@@ -73,14 +77,38 @@ public class AccountsController {
     private VBox employeeVBox;
     @FXML
     private Button addEmployeeBtn;
+    @FXML
+    private Button refreshBtn;
 
     // --------------------------------------------------------------------------//
     public void initialize() {
+        slider.setVisible(true);
         System.out.println(Session.getUsername());
         nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
         Circle clip = new Circle(50, 50, 50);
         profilePic.setClip(clip);
         loadEmployees();
+
+        double hiddenX = -200; // sidebar width
+        slider.setTranslateX(hiddenX);
+
+        // Slide IN animation
+        TranslateTransition slideIn = new TranslateTransition(Duration.seconds(0.3), slider);
+        slideIn.setToX(0);
+
+        // Slide OUT animation
+        TranslateTransition slideOut = new TranslateTransition(Duration.seconds(0.3), slider);
+        slideOut.setToX(hiddenX);
+
+        // 1. Hover near left edge → slide IN
+        rootPane.setOnMouseMoved(event -> {
+            if (event.getX() <= 50) { // 10px from left edge
+                slideIn.play();
+            }
+        });
+
+        // 2. Hover OUTSIDE sidebar → slide OUT
+        slider.setOnMouseExited(event -> slideOut.play());
     }
 
     @FXML
@@ -99,17 +127,26 @@ public class AccountsController {
     }
 
     @FXML
-    private void onAddEmployee(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/EmployeePane.fxml"));
-            AnchorPane pane = loader.load();
+    private void onAddEmployee(ActionEvent event) throws IOException {
+        // open new Pane to add employee
+        // try {
+        // FXMLLoader loader = new
+        // FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/EmployeePane.fxml"));
+        // AnchorPane pane = loader.load();
 
-            // optionally set data using the child controller
+        // // optionally set data using the child controller
 
-            employeeVBox.getChildren().add(pane);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // employeeVBox.getChildren().add(pane);
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // }
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/AddEmployee.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("Add Employee");
+        stage.show();
     }
 
     private void loadEmployees() {
@@ -129,5 +166,11 @@ public class AccountsController {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    private void refreshPage(ActionEvent event) {
+        employeeVBox.getChildren().clear();
+        loadEmployees();
     }
 }
