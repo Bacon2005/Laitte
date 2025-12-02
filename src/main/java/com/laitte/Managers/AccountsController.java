@@ -1,12 +1,6 @@
 package com.laitte.Managers;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import com.laitte.Managers.Employees.Employee;
@@ -16,16 +10,14 @@ import com.laitte.Managers.Employees.EmployeePaneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
@@ -81,10 +73,6 @@ public class AccountsController {
     private VBox employeeVBox;
     @FXML
     private Button addEmployeeBtn;
-
-    private static final String URL = "jdbc:postgresql://localhost:5432/Laitte";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "password";
 
     // --------------------------------------------------------------------------//
     public void initialize() {

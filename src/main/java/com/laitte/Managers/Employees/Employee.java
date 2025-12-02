@@ -2,12 +2,12 @@ package com.laitte.Managers.Employees;
 
 public class Employee {
     private String name;
-    private String id;
+    private int id;
     private String role;
     private boolean manager;
     private String imagePath;
 
-    public Employee(String name, String id, String role, boolean manager, String imagePath) {
+    public Employee(String name, int id, String role, boolean manager, String imagePath) {
         this.name = name;
         this.id = id;
         this.role = role;
@@ -20,7 +20,7 @@ public class Employee {
         return name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

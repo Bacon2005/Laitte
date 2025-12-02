@@ -31,7 +31,7 @@ public class EmployeeDAO {
 
             while (rs.next()) {
                 String name = rs.getString("firstname") + " " + rs.getString("lastname");
-                String id = rs.getString("employeeid");
+                int id = rs.getInt("employeeid");
                 String role = rs.getString("rolename");
                 boolean manager = rs.getBoolean("ismanager");
                 String imagePath = rs.getString("image_path");
@@ -43,5 +43,25 @@ public class EmployeeDAO {
         }
 
         return list;
+    }
+
+    public static void setManager(int employeeID, boolean isManager) {
+        String query = """
+                UPDATE employeerole SET ismanager = ?
+                WHERE roleid =
+                (SELECT roleid FROM employee WHERE employeeid = ?)
+                """;
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setBoolean(1, isManager);
+            pstmt.setInt(2, employeeID);
+            int rows = pstmt.executeUpdate();
+
+            System.out.println("Rows updated: " + rows);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -29,9 +29,9 @@ public class EmployeePaneController {
     private Label employeeName;
 
     // Call this to populate the pane with database info
-    public void setData(String name, String id, String role, boolean isManager, String imagePath) {
+    public void setData(String name, int id, String role, boolean isManager, String imagePath) {
         employeeName.setText(name);
-        employeeID.setText(id);
+        employeeID.setText(String.valueOf(id)); // int to string
         roleName.setText(role);
         managerCheckBox.setSelected(isManager);
 
@@ -42,6 +42,27 @@ public class EmployeePaneController {
             employeePic.setImage(
                     new Image(getClass().getResourceAsStream("/Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg")));
         }
+    }
+
+    @FXML
+    private void onManagerCheckBoxToggled() {
+        boolean selected = managerCheckBox.isSelected();
+        try {
+            if (selected) {
+                System.out.println("Checkbox selected");
+                int id = Integer.parseInt(employeeID.getText());
+                EmployeeDAO.setManager(id, selected); // updates DB
+                roleName.setText("Manager");
+            } else {
+                System.out.println("Checkbox deselected");
+                int id = Integer.parseInt(employeeID.getText());
+                EmployeeDAO.setManager(id, selected); // updates DB
+                roleName.setText("Worker");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

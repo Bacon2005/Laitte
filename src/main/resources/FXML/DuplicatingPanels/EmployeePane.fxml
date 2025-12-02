@@ -52,7 +52,7 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <CheckBox fx:id="managerCheckBox" layoutX="607.0" layoutY="42.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Manager">
+                        <CheckBox fx:id="managerCheckBox" layoutX="607.0" layoutY="42.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Manager" onAction="#onManagerCheckBoxToggled">
                            <font>
                               <Font name="Arial Bold" size="22.0" />
                            </font>
