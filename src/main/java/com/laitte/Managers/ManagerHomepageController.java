@@ -18,31 +18,22 @@ public class ManagerHomepageController {
 
     @FXML
     Label nameLabel;
-
     @FXML
     Button logoutBtn;
-
     @FXML
     private Label Menu;
-
     @FXML
     private Label MenuClose;
-
     @FXML
     private Button analytics;
-
     @FXML
     private Button inventory;
-
     @FXML
-    private Button Accounts;
-
+    private Button Accounts; // Added Accounts button
     @FXML
     private AnchorPane rootPane;
-
     @FXML
     private AnchorPane slider;
-
     @FXML
     private ImageView profilePic;
 
@@ -74,11 +65,7 @@ public class ManagerHomepageController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
-
-    }
-
-    public void setUsername(String username) {
-        nameLabel.setText("Hello, " + username);
+        nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
     }
 
     @FXML
@@ -87,8 +74,8 @@ public class ManagerHomepageController {
     }
 
     @FXML
-    private void manageAccountsBtn(ActionEvent event) throws IOException {
-
+    private void AccountsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
     @FXML
