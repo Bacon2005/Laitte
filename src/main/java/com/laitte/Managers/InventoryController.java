@@ -1,21 +1,60 @@
 package com.laitte.Managers;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.laitte.LaitteMain.Database;
 
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+
+
 public class InventoryController {
+    @FXML
+    private TableView<Item> inventoryTable;
+    @FXML
+    private TableColumn<Item, String> mealId;
+    @FXML
+    private TableColumn<Item, String> mealName;
+    @FXML
+    private TableColumn<Item, Integer> stockAvailable;
+    @FXML
+    private TableColumn<Item, String> stockDate;
+    @FXML
+    private TableColumn<Item, String> Category;
+    @FXML
+    private TableColumn<Item, String> mealType;
+    @FXML
+    private TableColumn<Item, Double> price;
 
 
     public void initialize() {
+
+        mealId.setCellValueFactory(new PropertyValueFactory<>("mealId"));
+        mealName.setCellValueFactory(new PropertyValueFactory<>("mealName"));
+        stockAvailable.setCellValueFactory(new PropertyValueFactory<>("stockAvailable"));
+        stockDate.setCellValueFactory(new PropertyValueFactory<>("stockDate"));
+        Category.setCellValueFactory(new PropertyValueFactory<>("category"));
+        mealType.setCellValueFactory(new PropertyValueFactory<>("mealType"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        loadTableData();
+
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
 
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
@@ -75,9 +114,51 @@ public class InventoryController {
 
     @FXML
     private AnchorPane slider;
+    @FXML
+    private Button Accounts;
 
     @FXML
-    void logoutBtn(ActionEvent event) {}
-    
+    void m_inventory_add(ActionEvent event) {}
+
+    //
+
+    @FXML
+    private void logoutBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
+    }
+
+    public void loadTableData() {
+    ObservableList<Item> list = FXCollections.observableArrayList();
+
+    String sql = "SELECT m.mealid, m.mealname, i.stockavailable, i.stockdate, " +
+                 "c.mealcategory, m2.mealtype, m.mealprice " +
+                 "FROM meal m " +
+                 "JOIN inventory i ON m.inventoryid = i.inventoryid " +
+                 "JOIN category c ON m.categoryid = c.categoryid " +
+                 "LEFT JOIN mealtype m2 ON m.mealtypeid = m2.mealtypeid " +
+                 "ORDER BY m.mealid";
+
+    try (Connection con = Database.connect();
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+
+        while (rs.next()) {
+            list.add(new Item(
+                rs.getInt("mealid"),
+                rs.getString("mealname"),
+                rs.getInt("stockavailable"),
+                rs.getString("stockdate"),
+                rs.getString("mealcategory"),
+                rs.getString("mealtype"),
+                rs.getDouble("mealprice")
+            ));
+        }
+
+        inventoryTable.setItems(list);  // this will work if tableView is properly initialized
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
 }

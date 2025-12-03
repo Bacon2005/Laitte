@@ -90,4 +90,11 @@ public class ManagerHomepageController {
     private void manageAccountsBtn(ActionEvent event) throws IOException {
 
     }
+
+    @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
+    SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
+    }
+
+
 }

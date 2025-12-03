@@ -51,3 +51,8 @@
     /*-fx-background-color: linear-gradient(to right, #7b2be3, #3c85ff);*/
     -fx-background-color: WHITE;
 }
+
+.Text-Fields {
+    -fx-background-color: #ABBF9A;
+     -fx-background-radius: 20px;
+}

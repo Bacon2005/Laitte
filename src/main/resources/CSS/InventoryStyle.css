@@ -1,6 +1,10 @@
 /*Style Sheet for Inventory Scene */
 /* . is for specific item and hashtag is for the whole thing*/
 
+.rootPane{
+    -fx-background-color: WHITE;
+}
+
 .m_inventory_add {
     -fx-background-color: #3FB38E;
     -fx-background-radius: 15;
@@ -22,3 +26,18 @@
     -fx-text-fill: BLACK;
     -fx-opacity: 0.5;
 }
+
+.inventory_table{
+    -fx-background-color: WHITE;
+    -fx-border-color: #DBDBDB;
+}
+
+
+
+
+
+
+
+
+
+
