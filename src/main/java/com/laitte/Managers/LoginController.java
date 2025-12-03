@@ -125,18 +125,12 @@ public class LoginController implements Initializable {
         password = passwordField.getText();
 
         if (validateLogin(username, password) && isManager(username)) {
-
-            SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", controller -> {
-                ManagerHomepageController c = (ManagerHomepageController) controller;
-                c.setUsername(username);
-            });
+            Session.setUsername(username); // Store username in session
+            SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null);
 
         } else if (validateLogin(username, password)) {
-
-            SceneController.switchScene(event, "/FXML/Homepage.fxml", controller -> {
-                HomepageController c = (HomepageController) controller;
-                c.setUsername(username);
-            });
+            Session.setUsername(username); // Store username in session
+            SceneController.switchScene(event, "/FXML/Homepage.fxml", null);
 
         } else {
             System.out.println("Invalid credentials.");

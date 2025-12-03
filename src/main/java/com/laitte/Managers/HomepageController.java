@@ -71,11 +71,7 @@ public class HomepageController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
-
-    }
-
-    public void setUsername(String username) {
-        nameLabel.setText("Hello, " + username);
+        nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
     }
 
     @FXML
