@@ -77,4 +77,11 @@ public class ManagerHomepageController {
     private void AccountsBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
+
+    @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
+    SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
+    }
+
+
 }
