@@ -12,34 +12,28 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class HomepageController {
+public class ManagerHomepageController {
 
     // --------------------------- Variables for FXML ----------------------------//
 
     @FXML
-    Label nameLabel;
-
+    Label nameLabel; //adding this comment
     @FXML
     Button logoutBtn;
-
     @FXML
     private Label Menu;
-
     @FXML
     private Label MenuClose;
-
     @FXML
     private Button analytics;
-
     @FXML
     private Button inventory;
-
+    @FXML
+    private Button Accounts; // Added Accounts button
     @FXML
     private AnchorPane rootPane;
-
     @FXML
     private AnchorPane slider;
-
     @FXML
     private ImageView profilePic;
 
@@ -76,11 +70,16 @@ public class HomepageController {
 
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null);
+        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
     }
 
-   @FXML
-    private void inventory(ActionEvent event) throws IOException {
+    @FXML
+    private void AccountsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
+    }
+
+    @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
     SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
     }
 
