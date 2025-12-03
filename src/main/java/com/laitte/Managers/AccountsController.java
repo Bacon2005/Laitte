@@ -128,18 +128,6 @@ public class AccountsController {
 
     @FXML
     private void onAddEmployee(ActionEvent event) throws IOException {
-        // open new Pane to add employee
-        // try {
-        // FXMLLoader loader = new
-        // FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/EmployeePane.fxml"));
-        // AnchorPane pane = loader.load();
-
-        // // optionally set data using the child controller
-
-        // employeeVBox.getChildren().add(pane);
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/AddEmployee.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();

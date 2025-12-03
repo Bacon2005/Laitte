@@ -74,8 +74,6 @@ public class LoginController implements Initializable {
 
     public boolean validateLogin(String username, String password) {
 
-        // String query = "SELECT * FROM \"public\".\"login\" WHERE username = ? AND
-        // password = ?";
         String query = """
                             SELECT e.firstname, l.loginid, l.username, l.password
                 FROM employee e
