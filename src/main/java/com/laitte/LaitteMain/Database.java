@@ -2,7 +2,6 @@ package com.laitte.LaitteMain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 // Database connection class

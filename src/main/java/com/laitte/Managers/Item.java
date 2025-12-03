@@ -1,7 +1,5 @@
 package com.laitte.Managers;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Item {
     private int mealId;
