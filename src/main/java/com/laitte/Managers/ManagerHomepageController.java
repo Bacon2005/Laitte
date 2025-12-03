@@ -17,7 +17,7 @@ public class ManagerHomepageController {
     // --------------------------- Variables for FXML ----------------------------//
 
     @FXML
-    Label nameLabel;
+    Label nameLabel; //adding this comment
     @FXML
     Button logoutBtn;
     @FXML
