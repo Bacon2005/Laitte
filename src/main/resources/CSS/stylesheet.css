@@ -11,14 +11,14 @@
     font-weight: 800;
 }
 
-.middle-text{
+.middle-text {
     -fx-font-family: "Inter";
     -fx-font-style: italic;
     -fx-font-weight: 800;
     -fx-font-size: 95px;
 }
 
-.TopBottom-text{
+.TopBottom-text {
     -fx-font-family: "Inter";
     -fx-font-weight: 800;
 }
@@ -49,7 +49,7 @@
 }
 
 .my-button:pressed {
-    -fx-background-color: linear-gradient(to right, #4a0fa1, #1f5fcc);
+    -fx-background-color: WHITE;
 }
 
 .profile-pic {
@@ -82,4 +82,16 @@
 .setting-logout-button:hover {
     /*-fx-background-color: linear-gradient(to right, #7b2be3, #3c85ff);*/
     -fx-background-color: WHITE;
+}
+
+.current-page-button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 20px;
+    -fx-background-radius: 30;
+    -fx-cursor: hand;
+    -fx-pref-width: 150;
+    -fx-alignment: center;
 }
