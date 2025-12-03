@@ -83,29 +83,6 @@ public class EmployeePaneController {
 
     @FXML
     private void deleteBtn(ActionEvent event) {
-        // int id = Integer.parseInt(employeeID.getText());
-
-        // // 1. Delete from DB
-        // boolean deleted = EmployeeDAO.deleteEmployee(id);
-
-        // if (deleted) {
-        // System.out.println("Employee deleted!");
-
-        // // 2. Remove pane from UI
-        // // employeePaneTemplate = the root pane of THIS employee row
-        // employeePaneTemplate.getParent().getChildrenUnmodifiable()
-        // .remove(employeePaneTemplate);
-
-        // // BUT JavaFX doesn't allow removal on unmodifiable list:
-        // // So cast it properly:
-
-        // ((javafx.scene.layout.VBox) employeePaneTemplate.getParent())
-        // .getChildren()
-        // .remove(employeePaneTemplate);
-
-        // } else {
-        // System.out.println("Failed to delete employee!");
-        // }
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ConfirmPage.fxml"));

@@ -111,6 +111,7 @@ public class AccountsController {
         slider.setOnMouseExited(event -> slideOut.play());
     }
 
+    // ------------------------------------------------------ Navigation
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
@@ -126,6 +127,12 @@ public class AccountsController {
         SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null); // Switch to Home Scene
     }
 
+    @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory Scene
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------------------------//
     @FXML
     private void onAddEmployee(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/AddEmployee.fxml"));
