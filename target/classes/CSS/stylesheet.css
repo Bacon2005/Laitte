@@ -51,3 +51,11 @@
     /*-fx-background-color: linear-gradient(to right, #7b2be3, #3c85ff);*/
     -fx-background-color: WHITE;
 }
+
+/* Active sidebar button */
+.my-button.active {
+    -fx-background-color: #4B2A11;  /* dark background for active */
+    -fx-text-fill: white;           /* white text */
+    -fx-font-weight: bold;          /* make text bold */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0, 0, 2); /* optional subtle shadow */
+}
