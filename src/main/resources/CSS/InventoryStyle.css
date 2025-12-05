@@ -33,6 +33,28 @@
 }
 
 
+.table-view .table-row-cell {
+    -fx-border-color: transparent white #d3d3d3 white; /* top right bottom left */
+    -fx-border-width: 0 1 1 1; /* only bottom */
+
+
+    -fx-background-color: WHITE;
+
+    -fx-min-height: 50px;   /* minimum row height */
+    -fx-pref-height: 50px;  /* preferred row height */
+    -fx-max-height: 50px;   /* maximum row height */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #3FB38E; /* light highlight on hover */
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent; 
+
+
+     -fx-padding: 15 20 10 20;
+}
 
 
 

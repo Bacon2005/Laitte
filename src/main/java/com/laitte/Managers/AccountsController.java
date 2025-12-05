@@ -127,6 +127,11 @@ public class AccountsController {
     }
 
     @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
+    SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
+    }
+
+    @FXML
     private void onAddEmployee(ActionEvent event) throws IOException {
         // open new Pane to add employee
         // try {
