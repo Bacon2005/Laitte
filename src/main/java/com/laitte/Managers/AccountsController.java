@@ -111,6 +111,7 @@ public class AccountsController {
         slider.setOnMouseExited(event -> slideOut.play());
     }
 
+    // ------------------------------------------------------ Navigation
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
@@ -128,23 +129,12 @@ public class AccountsController {
 
     @FXML
     private void inventoryBtn(ActionEvent event) throws IOException {
-    SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
+        SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory Scene
     }
 
+    // -----------------------------------------------------------------------------------------------------------------------------------//
     @FXML
     private void onAddEmployee(ActionEvent event) throws IOException {
-        // open new Pane to add employee
-        // try {
-        // FXMLLoader loader = new
-        // FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/EmployeePane.fxml"));
-        // AnchorPane pane = loader.load();
-
-        // // optionally set data using the child controller
-
-        // employeeVBox.getChildren().add(pane);
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/AddEmployee.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();

@@ -52,10 +52,24 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <CheckBox fx:id="managerCheckBox" layoutX="607.0" layoutY="42.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Manager" onAction="#onManagerCheckBoxToggled">
+                        <CheckBox fx:id="managerCheckBox" layoutX="608.0" layoutY="20.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Manager">
                            <font>
                               <Font name="Arial Bold" size="22.0" />
                            </font>
                         </CheckBox>
+                        <Button fx:id="deleteBtn" layoutX="608.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="6.0" onAction="#deleteBtn">
+                           <graphic>
+                              <ImageView fx:id="deleteImage" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/542724.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="650.0" layoutY="67.0" text="Delete">
+                           <font>
+                              <Font name="Arial Bold" size="22.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>

@@ -1,5 +1,6 @@
 package com.laitte.Managers;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,12 +40,15 @@ public class AddEmployeeController {
     }
 
     @FXML
-    private void confirmBtn(ActionEvent event) {
+    private void confirmBtn(ActionEvent event) throws IOException {
         String firstName = addFirstName.getText();
         String lastName = addLastName.getText();
         boolean managerStatus = isManager.isSelected();
-        String role = managerStatus ? "Manager" : "Employee";
+        String role = managerStatus ? "Manager" : "Worker";
         String profilePicPath = profilePicture.getText();
+
+        String defaultUsername = firstName.substring(0, 2) + lastName;
+        String defaultPassword = defaultUsername;
 
         String insertRole = """
                     INSERT INTO employeerole (rolename, ismanager)
@@ -52,13 +56,30 @@ public class AddEmployeeController {
                     RETURNING roleid
                 """;
 
+        String insertLogin = """
+                    INSERT INTO login (username, password)
+                    VALUES (?, ?)
+                    RETURNING loginid
+                """;
+
         String insertEmployee = """
-                    INSERT INTO employee (firstname, lastname, roleid, imagepath)
-                    VALUES (?, ?, ?, ?)
+                    INSERT INTO employee (firstname, lastname, roleid, imagepath, loginid)
+                    VALUES (?, ?, ?, ?, ?)
                 """;
 
         try (Connection conn = com.laitte.LaitteMain.Database.connect()) {
             conn.setAutoCommit(false);
+
+            // INSERT Login AND GET roleid
+            int loginID;
+            try (PreparedStatement pstmtLogin = conn.prepareStatement(insertLogin)) {
+                pstmtLogin.setString(1, defaultUsername);
+                pstmtLogin.setString(2, defaultPassword);
+
+                ResultSet rs = pstmtLogin.executeQuery();
+                rs.next();
+                loginID = rs.getInt("loginid");
+            }
 
             // INSERT ROLE AND GET roleid
             int roleID;
@@ -81,12 +102,13 @@ public class AddEmployeeController {
                 } else {
                     pstmtEmployee.setString(4, profilePicPath);
                 }
+                pstmtEmployee.setInt(5, loginID);
 
                 pstmtEmployee.executeUpdate();
             }
 
             conn.commit();
-            System.out.println("Employee + Role inserted successfully!");
+            System.out.println("Employee + Role + Login inserted successfully!");
 
         } catch (Exception e) {
             e.printStackTrace();
