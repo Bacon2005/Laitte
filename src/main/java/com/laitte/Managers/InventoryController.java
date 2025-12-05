@@ -1,3 +1,5 @@
+
+
 package com.laitte.Managers;
 
 import java.io.IOException;
@@ -12,17 +14,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
+import javafx.scene.control.TableRow;
 
 public class InventoryController {
     @FXML
@@ -80,6 +87,21 @@ public class InventoryController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
+
+        //for select and deselect
+        inventoryTable.setRowFactory(tableView -> {     //setRowFactory are basically additional istruction for the rows, allows for customization (hey give me a row to display)
+        TableRow<Item> row = new TableRow<>();          //creating single row object (heres a row object i made)
+
+        row.setOnMouseClicked(event -> {
+            if (!row.isEmpty() && event.getClickCount() == 2) { // single click only
+                int index = row.getIndex(); /*(Hey TableView, I clicked the row at position 3 — do something with that row) */
+                if (row.isSelected()) {
+                    // clicked again twice to deselect
+                    inventoryTable.getSelectionModel().clearSelection(index);
+                }
+            }});
+        return row;});  //(this is the row you actually use )
+
     }
 
     @FXML
@@ -114,19 +136,75 @@ public class InventoryController {
 
     @FXML
     private AnchorPane slider;
+
     @FXML
     private Button Accounts;
 
+    
+    //for adding items
     @FXML
-    void m_inventory_add(ActionEvent event) {}
+    void m_inventory_add(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/AddInventory.fxml"));
+        Parent root = loader.load(); // load the FXML
 
-    //
+        AddInventoryController addInventoryController = loader.getController();
+        addInventoryController.setMainController(this); // pass reference
+        
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("Add Item");
+        stage.show();
+    }
+
+
+    //for deleting
+    @FXML
+    void m_inventory_delete(ActionEvent event) {
+    Item selectedItem = inventoryTable.getSelectionModel().getSelectedItem();
+
+    if (selectedItem != null) {
+        int mealId = selectedItem.getMealId(); 
+
+        try (Connection conn = Database.connect()) {
+            String sql = "DELETE FROM meal WHERE mealid = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, mealId);
+            ps.executeUpdate();
+            System.out.println("Row deleted from database!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Remove from TableView
+        inventoryTable.getItems().remove(selectedItem);
+    } else {
+        System.out.println("No row selected!");
+    }
+}
+
+
+
+
 
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
     }
 
+    @FXML
+    private void homeBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null); // Switch to Home Scene
+    }
+
+    @FXML
+    private void AccountsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
+    }
+
+
+    //loading the data in
     public void loadTableData() {
     ObservableList<Item> list = FXCollections.observableArrayList();
 
@@ -158,7 +236,7 @@ public class InventoryController {
 
     } catch (Exception e) {
         e.printStackTrace();
-    }
-}
+    }}
+
 
 }
