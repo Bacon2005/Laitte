@@ -98,6 +98,7 @@ public class EmployeePaneController {
 
             // Open confirm window
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setScene(new Scene(root));
             stage.setTitle("Confirm Delete");
             stage.show();
