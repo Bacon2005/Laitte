@@ -74,7 +74,12 @@ public class LoginController implements Initializable {
 
     public boolean validateLogin(String username, String password) {
 
-        String query = "SELECT * FROM \"public\".\"login\" WHERE username = ? AND password = ?";
+        String query = """
+                            SELECT e.firstname, l.loginid, l.username, l.password
+                FROM employee e
+                JOIN login l ON e.loginid = l.loginid
+                WHERE l.username = ? AND l.password = ?
+                            """;
 
         try (Connection conn = com.laitte.LaitteMain.Database.connect();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -85,6 +90,8 @@ public class LoginController implements Initializable {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                String firstName = rs.getString("firstname");
+                Session.setUsername(firstName);
                 return true; // Valid credentials
             } else {
                 return false; // Invalid credentials
@@ -125,11 +132,9 @@ public class LoginController implements Initializable {
         password = passwordField.getText();
 
         if (validateLogin(username, password) && isManager(username)) {
-            Session.setUsername(username); // Store username in session
             SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null);
 
         } else if (validateLogin(username, password)) {
-            Session.setUsername(username); // Store username in session
             SceneController.switchScene(event, "/FXML/Homepage.fxml", null);
 
         } else {

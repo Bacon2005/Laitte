@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.laitte.LaitteMain.Database;
+
 public class EmployeeDAO {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/Laitte";
@@ -64,6 +66,59 @@ public class EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static boolean deleteEmployee(int employeeId) {
+        String getSQL = "SELECT loginid, roleid FROM employee WHERE employeeid = ?";
+        String deleteEmployeeSQL = "DELETE FROM employee WHERE employeeid = ?";
+        String deleteLoginSQL = "DELETE FROM login WHERE loginid = ?";
+        String deleteRoleSQL = "DELETE FROM employeerole WHERE roleid = ?";
+
+        try (Connection conn = Database.connect()) {
+
+            conn.setAutoCommit(false); // BEGIN transaction
+
+            int loginId = 0;
+            int roleId = 0;
+
+            // 1. Get loginid + roleid
+            try (PreparedStatement stmt = conn.prepareStatement(getSQL)) {
+                stmt.setInt(1, employeeId);
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    loginId = rs.getInt("loginid");
+                    roleId = rs.getInt("roleid");
+                } else {
+                    return false; // employee not found
+                }
+            }
+
+            // 2. Delete employee first
+            try (PreparedStatement stmt = conn.prepareStatement(deleteEmployeeSQL)) {
+                stmt.setInt(1, employeeId);
+                stmt.executeUpdate();
+            }
+
+            // 3. Delete role row
+            try (PreparedStatement stmt = conn.prepareStatement(deleteRoleSQL)) {
+                stmt.setInt(1, roleId);
+                stmt.executeUpdate();
+            }
+
+            // 4. Delete login row
+            try (PreparedStatement stmt = conn.prepareStatement(deleteLoginSQL)) {
+                stmt.setInt(1, loginId);
+                stmt.executeUpdate();
+            }
+
+            conn.commit(); // COMMIT transaction
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

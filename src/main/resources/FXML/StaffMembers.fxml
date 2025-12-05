@@ -39,11 +39,11 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="refreshBtn" layoutX="211.0" layoutY="22.0" mnemonicParsing="false" onAction="#refreshPage" prefHeight="39.0" prefWidth="20.0">
+            <Button fx:id="refreshBtn" layoutX="205.0" layoutY="28.0" mnemonicParsing="false" onAction="#refreshPage" prefHeight="30.0" prefWidth="6.0">
                <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/plus.png" />
+                        <Image url="@../Images/Refresh.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -118,7 +118,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventoryBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -186,7 +186,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <ScrollPane fitToWidth="true" layoutX="241.0" layoutY="96.0" prefHeight="551.0" prefWidth="798.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+      <ScrollPane fitToWidth="true" layoutX="241.0" layoutY="96.0" prefHeight="551.0" prefWidth="798.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" vbarPolicy="NEVER">
          <content>
             <VBox fx:id="employeeVBox" prefHeight="603.0" prefWidth="766.0" spacing="25.0" />
          </content>
@@ -242,11 +242,25 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <CheckBox fx:id="managerCheckBox" layoutX="607.0" layoutY="42.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Manager">
+            <CheckBox fx:id="managerCheckBox" layoutX="608.0" layoutY="20.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Manager">
                <font>
                   <Font name="Arial Bold" size="22.0" />
                </font>
             </CheckBox>
+            <Button fx:id="deleteBtn" layoutX="608.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="6.0">
+               <graphic>
+                  <ImageView fx:id="deleteImage" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/542724.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="650.0" layoutY="67.0" text="Delete">
+               <font>
+                  <Font name="Arial Bold" size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

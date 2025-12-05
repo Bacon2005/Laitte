@@ -17,7 +17,7 @@ public class ManagerHomepageController {
     // --------------------------- Variables for FXML ----------------------------//
 
     @FXML
-    Label nameLabel;
+    Label nameLabel; // adding this comment
     @FXML
     Button logoutBtn;
     @FXML
@@ -68,6 +68,8 @@ public class ManagerHomepageController {
         nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
     }
 
+    // ------------------------------------------------------------ Navigation
+
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
@@ -77,4 +79,10 @@ public class ManagerHomepageController {
     private void AccountsBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
+
+    @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory
+    }
+    // ------------------------------------------------------------------------------------------------------------------------------------//
 }

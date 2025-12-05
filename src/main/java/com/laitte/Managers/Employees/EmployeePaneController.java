@@ -1,11 +1,19 @@
 package com.laitte.Managers.Employees;
 
+import com.laitte.Managers.ConfirmController;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class EmployeePaneController {
 
@@ -27,8 +35,16 @@ public class EmployeePaneController {
     private CheckBox managerCheckBox;
     @FXML
     private Label employeeName;
+    @FXML
+    private Button deleteBtn;
+    @FXML
+    private ImageView deleteImage;
 
     // Call this to populate the pane with database info
+    public void initialize() {
+        deleteImage.setImage(new Image(getClass().getResourceAsStream("/Images/542724.png")));
+    }
+
     public void setData(String name, int id, String role, boolean isManager, String imagePath) {
         employeeName.setText(name);
         employeeID.setText(String.valueOf(id)); // int to string
@@ -65,4 +81,29 @@ public class EmployeePaneController {
 
     }
 
+    @FXML
+    private void deleteBtn(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/ConfirmPage.fxml"));
+            Parent root = loader.load();
+
+            // Get controller of Confirm page
+            ConfirmController confirmController = loader.getController();
+
+            // Pass employee ID and pane reference
+            confirmController.setupForDelete(
+                    Integer.parseInt(employeeID.getText()),
+                    employeePaneTemplate);
+
+            // Open confirm window
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Confirm Delete");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

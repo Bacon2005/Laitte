@@ -76,6 +76,13 @@ public class HomepageController {
 
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
+        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null);
     }
+
+   @FXML
+    private void inventory(ActionEvent event) throws IOException {
+    SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
+    }
+
+
 }
