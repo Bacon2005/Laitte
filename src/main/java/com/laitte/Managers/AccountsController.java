@@ -124,7 +124,7 @@ public class AccountsController {
 
     @FXML
     private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null); // Switch to Home Scene
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
     }
 
     @FXML
@@ -135,7 +135,7 @@ public class AccountsController {
     // -----------------------------------------------------------------------------------------------------------------------------------//
     @FXML
     private void onAddEmployee(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/AddEmployee.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/EmployeePage/AddEmployee.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setResizable(false);

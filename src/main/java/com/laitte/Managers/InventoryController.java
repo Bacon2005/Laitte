@@ -1,5 +1,4 @@
 
-
 package com.laitte.Managers;
 
 import java.io.IOException;
@@ -49,8 +48,13 @@ public class InventoryController {
     @FXML
     private TableColumn<Item, Double> price;
 
-
     public void initialize() {
+
+        if (Session.getManager()) {
+            Accounts.setVisible(true);
+        } else {
+            Accounts.setVisible(false);
+        }
 
         mealId.setCellValueFactory(new PropertyValueFactory<>("mealId"));
         mealName.setCellValueFactory(new PropertyValueFactory<>("mealName"));
@@ -88,19 +92,25 @@ public class InventoryController {
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
 
-        //for select and deselect
-        inventoryTable.setRowFactory(tableView -> {     //setRowFactory are basically additional istruction for the rows, allows for customization (hey give me a row to display)
-        TableRow<Item> row = new TableRow<>();          //creating single row object (heres a row object i made)
+        // for select and deselect
+        inventoryTable.setRowFactory(tableView -> { // setRowFactory are basically additional istruction for the rows,
+                                                    // allows for customization (hey give me a row to display)
+            TableRow<Item> row = new TableRow<>(); // creating single row object (heres a row object i made)
 
-        row.setOnMouseClicked(event -> {
-            if (!row.isEmpty() && event.getClickCount() == 2) { // single click only
-                int index = row.getIndex(); /*(Hey TableView, I clicked the row at position 3 — do something with that row) */
-                if (row.isSelected()) {
-                    // clicked again twice to deselect
-                    inventoryTable.getSelectionModel().clearSelection(index);
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 2) { // single click only
+                    int index = row.getIndex(); /*
+                                                 * (Hey TableView, I clicked the row at position 3 — do something with
+                                                 * that row)
+                                                 */
+                    if (row.isSelected()) {
+                        // clicked again twice to deselect
+                        inventoryTable.getSelectionModel().clearSelection(index);
+                    }
                 }
-            }});
-        return row;});  //(this is the row you actually use )
+            });
+            return row;
+        }); // (this is the row you actually use )
 
     }
 
@@ -140,8 +150,7 @@ public class InventoryController {
     @FXML
     private Button Accounts;
 
-    
-    //for adding items
+    // for adding items
     @FXML
     void m_inventory_add(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/AddInventory.fxml"));
@@ -149,7 +158,7 @@ public class InventoryController {
 
         AddInventoryController addInventoryController = loader.getController();
         addInventoryController.setMainController(this); // pass reference
-        
+
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setResizable(false);
@@ -158,35 +167,30 @@ public class InventoryController {
         stage.show();
     }
 
-
-    //for deleting
+    // for deleting
     @FXML
     void m_inventory_delete(ActionEvent event) {
-    Item selectedItem = inventoryTable.getSelectionModel().getSelectedItem();
+        Item selectedItem = inventoryTable.getSelectionModel().getSelectedItem();
 
-    if (selectedItem != null) {
-        int mealId = selectedItem.getMealId(); 
+        if (selectedItem != null) {
+            int mealId = selectedItem.getMealId();
 
-        try (Connection conn = Database.connect()) {
-            String sql = "DELETE FROM meal WHERE mealid = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, mealId);
-            ps.executeUpdate();
-            System.out.println("Row deleted from database!");
-        } catch (Exception e) {
-            e.printStackTrace();
+            try (Connection conn = Database.connect()) {
+                String sql = "DELETE FROM meal WHERE mealid = ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, mealId);
+                ps.executeUpdate();
+                System.out.println("Row deleted from database!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Remove from TableView
+            inventoryTable.getItems().remove(selectedItem);
+        } else {
+            System.out.println("No row selected!");
         }
-
-        // Remove from TableView
-        inventoryTable.getItems().remove(selectedItem);
-    } else {
-        System.out.println("No row selected!");
     }
-}
-
-
-
-
 
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
@@ -203,40 +207,38 @@ public class InventoryController {
         SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
-
-    //loading the data in
+    // loading the data in
     public void loadTableData() {
-    ObservableList<Item> list = FXCollections.observableArrayList();
+        ObservableList<Item> list = FXCollections.observableArrayList();
 
-    String sql = "SELECT m.mealid, m.mealname, i.stockavailable, i.stockdate, " +
-                 "c.mealcategory, m2.mealtype, m.mealprice " +
-                 "FROM meal m " +
-                 "JOIN inventory i ON m.inventoryid = i.inventoryid " +
-                 "JOIN category c ON m.categoryid = c.categoryid " +
-                 "LEFT JOIN mealtype m2 ON m.mealtypeid = m2.mealtypeid " +
-                 "ORDER BY m.mealid";
+        String sql = "SELECT m.mealid, m.mealname, i.stockavailable, i.stockdate, " +
+                "c.mealcategory, m2.mealtype, m.mealprice " +
+                "FROM meal m " +
+                "JOIN inventory i ON m.inventoryid = i.inventoryid " +
+                "JOIN category c ON m.categoryid = c.categoryid " +
+                "LEFT JOIN mealtype m2 ON m.mealtypeid = m2.mealtypeid " +
+                "ORDER BY m.mealid";
 
-    try (Connection con = Database.connect();
-         PreparedStatement pst = con.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
+        try (Connection con = Database.connect();
+                PreparedStatement pst = con.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery()) {
 
-        while (rs.next()) {
-            list.add(new Item(
-                rs.getInt("mealid"),
-                rs.getString("mealname"),
-                rs.getInt("stockavailable"),
-                rs.getString("stockdate"),
-                rs.getString("mealcategory"),
-                rs.getString("mealtype"),
-                rs.getDouble("mealprice")
-            ));
+            while (rs.next()) {
+                list.add(new Item(
+                        rs.getInt("mealid"),
+                        rs.getString("mealname"),
+                        rs.getInt("stockavailable"),
+                        rs.getString("stockdate"),
+                        rs.getString("mealcategory"),
+                        rs.getString("mealtype"),
+                        rs.getDouble("mealprice")));
+            }
+
+            inventoryTable.setItems(list); // this will work if tableView is properly initialized
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        inventoryTable.setItems(list);  // this will work if tableView is properly initialized
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }}
-
+    }
 
 }
