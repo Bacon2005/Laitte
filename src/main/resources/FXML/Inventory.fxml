@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -169,5 +170,19 @@
          </children>
       </AnchorPane>
       <Button fx:id="m_inventory_add" layoutX="857.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_add" prefHeight="35.0" prefWidth="96.0" styleClass="m_inventory_add" text="+ Add Item" />
+      <AnchorPane fx:id="noselected" layoutX="698.0" layoutY="62.0" prefHeight="31.0" prefWidth="54.0" visible="false">
+         <children>
+            <TextField editable="false" layoutY="3.0" prefHeight="28.0" prefWidth="144.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <Label layoutX="9.0" layoutY="5.0" prefHeight="17.0" prefWidth="144.0" text="No row is selected" textFill="#e10000">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
