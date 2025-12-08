@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 
 import com.laitte.LaitteMain.Database;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -150,6 +151,9 @@ public class InventoryController {
     @FXML
     private Button Accounts;
 
+    @FXML
+    private AnchorPane noselected;
+
     // for adding items
     @FXML
     void m_inventory_add(ActionEvent event) throws IOException {
@@ -172,23 +176,37 @@ public class InventoryController {
     void m_inventory_delete(ActionEvent event) {
         Item selectedItem = inventoryTable.getSelectionModel().getSelectedItem();
 
+        if (inventoryTable.getSelectionModel().getSelectedItem() == null) {
+            noselected.setOpacity(1); // reset opacity
+            noselected.setVisible(true); // make it visible
+
+            FadeTransition fade = new FadeTransition(Duration.seconds(1), noselected);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.setDelay(Duration.seconds(2));
+            fade.play();
+        }
+
         if (selectedItem != null) {
             int mealId = selectedItem.getMealId();
+            int inventoryId = selectedItem.getInventoryId();
 
-            try (Connection conn = Database.connect()) {
-                String sql = "DELETE FROM meal WHERE mealid = ?";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setInt(1, mealId);
-                ps.executeUpdate();
-                System.out.println("Row deleted from database!");
+            try (Connection conn = Database.connect();
+                    PreparedStatement ps1 = conn.prepareStatement("DELETE FROM meal WHERE mealid = ?");
+                    PreparedStatement ps2 = conn.prepareStatement("DELETE FROM inventory WHERE inventoryid = ?")) {
+
+                ps1.setInt(1, mealId);
+                ps1.executeUpdate();
+
+                ps2.setInt(1, inventoryId);
+                ps2.executeUpdate();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             // Remove from TableView
             inventoryTable.getItems().remove(selectedItem);
-        } else {
-            System.out.println("No row selected!");
         }
     }
 
@@ -212,7 +230,7 @@ public class InventoryController {
         ObservableList<Item> list = FXCollections.observableArrayList();
 
         String sql = "SELECT m.mealid, m.mealname, i.stockavailable, i.stockdate, " +
-                "c.mealcategory, m2.mealtype, m.mealprice " +
+                "c.mealcategory, m2.mealtype, m.mealprice, i.inventoryid " +
                 "FROM meal m " +
                 "JOIN inventory i ON m.inventoryid = i.inventoryid " +
                 "JOIN category c ON m.categoryid = c.categoryid " +
@@ -231,7 +249,8 @@ public class InventoryController {
                         rs.getString("stockdate"),
                         rs.getString("mealcategory"),
                         rs.getString("mealtype"),
-                        rs.getDouble("mealprice")));
+                        rs.getDouble("mealprice"),
+                        rs.getInt("inventoryid")));
             }
 
             inventoryTable.setItems(list); // this will work if tableView is properly initialized

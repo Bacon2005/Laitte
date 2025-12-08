@@ -9,17 +9,20 @@ public class Item {
     private String category;
     private String mealType;
     private double price;
+    private int inventoryId;
 
     public Item(int mealId, String mealName, int stockAvailable, String stockDate,
-                String category, String mealType, double price) {
-        this.mealId = mealId;
-        this.mealName = mealName;
-        this.stockAvailable = stockAvailable;
-        this.stockDate = stockDate;
-        this.category = category;
-        this.mealType = mealType;
-        this.price = price;
-    }
+    String category, String mealType, double price, int inventoryId) {
+    this.mealId = mealId;
+    this.mealName = mealName;
+    this.stockAvailable = stockAvailable;
+    this.stockDate = stockDate;
+    this.category = category;
+    this.mealType = mealType;
+    this.price = price;
+    this.inventoryId = inventoryId;
+}
+
 
     public int getMealId() { return mealId; }
     public String getMealName() { return mealName; }
@@ -28,4 +31,5 @@ public class Item {
     public String getCategory() { return category; }
     public String getMealType() { return mealType; }
     public double getPrice() { return price; }
+    public int getInventoryId() { return inventoryId; }
 }

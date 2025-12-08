@@ -1,34 +1,28 @@
 package com.laitte.Managers;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddInventoryController {
-    @FXML
-    private TextField addMealName;
-
-    @FXML
-    private TextField addStockAvailable;
-
-    @FXML
-    private TextField addStockDate;
-
-    @FXML
-    private TextField addPrice;
-
-    @FXML
-    private TextField addCategory;
-
-    @FXML
-    private CheckBox isVegetarian;
+public class AddInventoryController implements Initializable {
+    @FXML private TextField addMealName;
+    @FXML private TextField addStockAvailable;
+    @FXML private TextField addStockDate;
+    @FXML private TextField addPrice;
+    @FXML private TextField addCategory;
+    @FXML private CheckBox isVegetarian;
+    @FXML private ComboBox<String> which_category;
 
     @FXML
     private void cancelBtn(ActionEvent event) {
@@ -36,6 +30,14 @@ public class AddInventoryController {
         stage.close();
     }
     private InventoryController mainController;
+
+    
+     public void initialize(URL url, ResourceBundle rb) {
+        // Load ComboBox items here
+        which_category.getItems().addAll("Breakfast", "Lunch", "Dinner");
+        System.out.println("Initialize loaded!");
+    }
+
 
     public void setMainController(InventoryController mainController) {
     this.mainController = mainController;}
@@ -45,8 +47,8 @@ public class AddInventoryController {
         String mealName = addMealName.getText(); // meal id
         String stockDate = addStockDate.getText(); //inventory id
         boolean mealStatus = isVegetarian.isSelected();
-        String mealtype = mealStatus ? "Vegetarian" : "Non-Vegetarian";  
-        String category = addCategory.getText(); //category id
+        String mealtype = mealStatus ? "Vegetarian" : "Non-Vegetarian"; 
+        String category = which_category.getSelectionModel().getSelectedItem();
 
 
         int stockAvailable = Integer.parseInt(addStockAvailable.getText()); //inventory id
@@ -62,14 +64,12 @@ public class AddInventoryController {
             VALUES (?, ?)
             RETURNING inventoryid
             """;
+            
+        String selectCategory = """
+            SELECT categoryid FROM category WHERE mealcategory = ?
+            """;
 
-
-        String insertCategory = """
-                    INSERT INTO category (mealcategory)
-                    VALUES (?)
-                    RETURNING categoryid
-                """;
-
+        
         String insertMeal = """
                     INSERT INTO meal (inventoryid, categoryid, mealtypeid, mealname, mealprice)
                     VALUES (?, ?, ?, ?, ?)
@@ -100,18 +100,20 @@ public class AddInventoryController {
             try (PreparedStatement ps = conn.prepareStatement(insertInventory)) {
             ps.setInt(1, stockAvailable);
             ps.setDate(2, sqlStockDate);
-
             try (ResultSet rs = ps.executeQuery()) {
-                    rs.next();
-                    inventoryID = rs.getInt("inventoryid");}}
-
-        // 3. Insert Category
-            int categoryID;
-            try (PreparedStatement ps = conn.prepareStatement(insertCategory)) { 
-            ps.setString(1, category);
-            var rs = ps.executeQuery();
             rs.next();
-            categoryID = rs.getInt("categoryid");}
+            inventoryID = rs.getInt("inventoryid");}}
+
+            // 3. Get Category ID based on ComboBox
+            int categoryID;
+            try (PreparedStatement ps = conn.prepareStatement(selectCategory)) {
+            ps.setString(1, category);
+            try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+            categoryID = rs.getInt("categoryid"); // correct column
+            } else {
+            throw new Exception("Category not found in database.");}}}
+
 
         // 4. Insert Meal
             try (var ps = conn.prepareStatement(insertMeal)) {

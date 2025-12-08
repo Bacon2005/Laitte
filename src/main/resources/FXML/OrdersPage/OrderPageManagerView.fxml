@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.ManagerOrderPageController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.OrderPageController">
    <children>
       <ImageView fitHeight="50.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -108,7 +109,26 @@
       </AnchorPane>
       <AnchorPane layoutX="586.0" layoutY="327.0" prefHeight="406.0" prefWidth="470.0" style="-fx-background-color: linear-gradient(to top , #22B08B,  #ABBF9A); -fx-background-radius: 25;">
          <children>
-            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="377.0" prefWidth="443.0" style="-fx-background-color: #ffffff50; -fx-background-radius: 25;" />
+            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="377.0" prefWidth="443.0" style="-fx-background-color: #ffffff50; -fx-background-radius: 25;">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="16.0" layoutY="19.0" prefHeight="336.0" prefWidth="413.0" vbarPolicy="NEVER">
+                     <content>
+                        <VBox prefHeight="333.0" prefWidth="410.0">
+                           <children>
+                              <AnchorPane prefHeight="119.0" prefWidth="410.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <ImageView fitHeight="106.0" fitWidth="124.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children></AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="27.0" layoutY="327.0" prefHeight="199.0" prefWidth="250.0" style="-fx-background-color: linear-gradient(to top , #22B08B,  #ABBF9A); -fx-background-radius: 25;">
@@ -139,7 +159,7 @@
             <AnchorPane layoutX="9.0" layoutY="11.0" prefHeight="177.0" prefWidth="232.0" style="-fx-background-color: #ffffff50; -fx-background-radius: 25;" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="slider" prefHeight="733.0" prefWidth="200.0">
+      <AnchorPane fx:id="slider" prefHeight="733.0" prefWidth="200.0" visible="false">
          <children>
             <Pane prefHeight="733.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
