@@ -174,7 +174,7 @@ public class InventoryController {
     FadeTransition fade = new FadeTransition(Duration.seconds(1), noselected);
     fade.setFromValue(1);              
     fade.setToValue(0);                
-    fade.setDelay(Duration.seconds(2));  
+    fade.setDelay(Duration.seconds(1));  
     fade.play();}
 
 
@@ -250,6 +250,4 @@ public class InventoryController {
     } catch (Exception e) {
         e.printStackTrace();
     }}
-
-
 }
