@@ -49,6 +49,45 @@ public class InventoryController {
     @FXML
     private TableColumn<Item, Double> price;
 
+    @FXML
+    private Button analytics;
+
+    @FXML
+    private Button home;
+
+    @FXML
+    private Button inventory;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private Button menu;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Button orders;
+
+    @FXML
+    private ImageView profilePic;
+
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private Button settingBtn;
+
+    @FXML
+    private AnchorPane slider;
+
+    @FXML
+    private Button Accounts;
+
+    @FXML
+    private AnchorPane noselected;
+
     public void initialize() {
 
         if (Session.getManager()) {
@@ -56,6 +95,7 @@ public class InventoryController {
         } else {
             Accounts.setVisible(false);
         }
+        nameLabel.setText("Hello, " + Session.getUsername());
 
         mealId.setCellValueFactory(new PropertyValueFactory<>("mealId"));
         mealName.setCellValueFactory(new PropertyValueFactory<>("mealName"));
@@ -112,47 +152,7 @@ public class InventoryController {
             });
             return row;
         }); // (this is the row you actually use )
-
     }
-
-    @FXML
-    private Button analytics;
-
-    @FXML
-    private Button home;
-
-    @FXML
-    private Button inventory;
-
-    @FXML
-    private Button logoutBtn;
-
-    @FXML
-    private Button menu;
-
-    @FXML
-    private Label nameLabel;
-
-    @FXML
-    private Button orders;
-
-    @FXML
-    private ImageView profilePic;
-
-    @FXML
-    private AnchorPane rootPane;
-
-    @FXML
-    private Button settingBtn;
-
-    @FXML
-    private AnchorPane slider;
-
-    @FXML
-    private Button Accounts;
-
-    @FXML
-    private AnchorPane noselected;
 
     // for adding items
     @FXML
@@ -183,7 +183,7 @@ public class InventoryController {
             FadeTransition fade = new FadeTransition(Duration.seconds(1), noselected);
             fade.setFromValue(1);
             fade.setToValue(0);
-            fade.setDelay(Duration.seconds(2));
+            fade.setDelay(Duration.seconds(1));
             fade.play();
         }
 
@@ -210,6 +210,8 @@ public class InventoryController {
         }
     }
 
+    // ----------------------------Navigation
+    // buttons------------------------------------//
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
@@ -217,14 +219,21 @@ public class InventoryController {
 
     @FXML
     private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null); // Switch to Home Scene
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
     }
 
     @FXML
     private void AccountsBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
+        SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
+    @FXML
+    private void ordersBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
+                                                                                                // Scene
+    }
+
+    // --------------------------------------------------------------------------//
     // loading the data in
     public void loadTableData() {
         ObservableList<Item> list = FXCollections.observableArrayList();
@@ -259,5 +268,4 @@ public class InventoryController {
             e.printStackTrace();
         }
     }
-
 }

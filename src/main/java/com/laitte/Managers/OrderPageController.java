@@ -4,16 +4,23 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import com.laitte.LaitteMain.Database;
+import com.laitte.Managers.Orders.Orders;
+import com.laitte.Managers.Orders.OrdersDAO;
+import com.laitte.Managers.Orders.OrdersPaneController;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -52,14 +59,46 @@ public class OrderPageController {
     private Label completedOrders;
     @FXML
     private Label cancelledOrders;
+    @FXML
+    private Label ordersMonth;
+    @FXML
+    private VBox ordersVbox;
+    @FXML
+    private ComboBox<String> monthComboBox;
+
+    @FXML
+    private AnchorPane notificationPane;
+    @FXML
+    private Button notificationBtn;
     // -------------------------------//
 
     public void initialize() {
+        notificationPane.setVisible(false);
+
         if (Session.getManager()) { // if they are manager they can see the accounts
             Accounts.setVisible(true); // if they are not manager they cant see the accounts button
         } else {
             Accounts.setVisible(false);
         }
+
+        // Add months to the ComboBox
+        monthComboBox.getItems().addAll(
+                "January", "February", "March", "April",
+                "May", "June", "July", "August",
+                "September", "October", "November", "December");
+
+        // Listen for month changes
+        monthComboBox.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.intValue() >= 0) {
+                ordersThisMonth(); // Updates the label
+                reloadOrders(); // Reloads UI and data
+            }
+        });
+
+        int currentMonth = java.time.LocalDate.now().getMonthValue();
+        monthComboBox.getSelectionModel().select(currentMonth - 1);
+
+        loadOrders();
 
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
 
@@ -94,6 +133,7 @@ public class OrderPageController {
         pendingOrders();
         completedOrders();
         cancelledOrders();
+        ordersThisMonth();
     }
 
     private void totalOrders() {
@@ -106,6 +146,9 @@ public class OrderPageController {
             if (rs.next()) {
                 int total = rs.getInt("totalOrders");
                 totalOrders.setText(String.valueOf(total));
+            } else {
+                // No rows returned → display 0
+                completedOrders.setText("0");
             }
 
         } catch (Exception e) {
@@ -125,6 +168,9 @@ public class OrderPageController {
             if (rs.next()) {
                 int pending = rs.getInt("pendingOrders");
                 pendingOrders.setText(String.valueOf(pending));
+            } else {
+                // No rows returned → display 0
+                completedOrders.setText("0");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,6 +191,9 @@ public class OrderPageController {
             if (rs.next()) {
                 int completed = rs.getInt("completedOrders");
                 completedOrders.setText(String.valueOf(completed));
+            } else {
+                // No rows returned → display 0
+                completedOrders.setText("0");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,10 +212,23 @@ public class OrderPageController {
             if (rs.next()) {
                 int cancelled = rs.getInt("cancelledOrders");
                 cancelledOrders.setText(String.valueOf(cancelled));
+            } else {
+                // No rows returned → display 0
+                completedOrders.setText("0");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void ordersThisMonth() {
+        int selectedMonth = monthComboBox.getSelectionModel().getSelectedIndex() + 1;
+
+        // Ask DAO for count
+        int totalOrders = OrdersDAO.countOrdersByMonth(selectedMonth);
+
+        // Update label
+        ordersMonth.setText(String.valueOf(totalOrders));
     }
 
     // ----------------------------Navigation----------------------------//
@@ -177,7 +239,7 @@ public class OrderPageController {
 
     @FXML
     private void AccountsBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
+        SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
     @FXML
@@ -187,6 +249,50 @@ public class OrderPageController {
 
     @FXML
     private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null); // Switch to home
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to home
     }
+    // -------------------------------------------------------------------//
+
+    private void loadOrders() {
+        List<Orders> orders = OrdersDAO.getAllOrders();
+
+        for (Orders ord : orders) {
+
+            // Only load if the order is pending
+            if (!ord.isPending()) {
+                continue; // skip non-pending orders
+            }
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/OrderList.fxml"));
+                AnchorPane pane = loader.load();
+
+                OrdersPaneController controller = loader.getController();
+                controller.setData(ord.getCustomer(), ord.getNum(), ord.isPending());
+
+                ordersVbox.getChildren().add(pane);
+
+                controller.setParentController(this);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void reloadOrders() {
+        ordersVbox.getChildren().clear(); // clear existing order panes
+        loadOrders(); // reload from database
+        totalOrders();
+        pendingOrders();
+        completedOrders();
+        cancelledOrders();
+        ordersThisMonth();
+    }
+
+    @FXML
+    private void notificationBtn(ActionEvent event) {
+        notificationPane.setVisible(!notificationPane.isVisible());
+    }
+
 }

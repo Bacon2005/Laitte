@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -42,9 +41,19 @@
             <Image url="@../Images/Leaves.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="m_inventory_add" layoutX="857.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_add" prefHeight="35.0" prefWidth="96.0" styleClass="m_inventory_add" text="+ Add Item" />
+      <AnchorPane fx:id="noselected" layoutX="698.0" layoutY="62.0" prefHeight="31.0" prefWidth="137.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;" visible="false">
          <children>
-            <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label layoutX="10.0" layoutY="4.0" prefHeight="25.0" prefWidth="137.0" text="No row is selected" textFill="#e10000">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
                      <font>
@@ -167,21 +176,6 @@
                   </Button>
                </children>
             </HBox>
-         </children>
-      </AnchorPane>
-      <Button fx:id="m_inventory_add" layoutX="857.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_add" prefHeight="35.0" prefWidth="96.0" styleClass="m_inventory_add" text="+ Add Item" />
-      <AnchorPane fx:id="noselected" layoutX="698.0" layoutY="62.0" prefHeight="31.0" prefWidth="54.0" visible="false">
-         <children>
-            <TextField editable="false" layoutY="3.0" prefHeight="28.0" prefWidth="144.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </TextField>
-            <Label layoutX="9.0" layoutY="5.0" prefHeight="17.0" prefWidth="144.0" text="No row is selected" textFill="#e10000">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
    </children>

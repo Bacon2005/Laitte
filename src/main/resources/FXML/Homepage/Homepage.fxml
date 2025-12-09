@@ -138,7 +138,7 @@
             </Pane>
             <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="492.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
                <children>
-                  <Button fx:id="home" mnemonicParsing="false" prefHeight="36.0" prefWidth="200.0" styleClass="my-button" text=" Home">
+                  <Button fx:id="home" mnemonicParsing="false" prefHeight="36.0" prefWidth="200.0" styleClass="current-page-button" text=" Home">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -256,7 +256,14 @@
                      <content>
                         <VBox prefHeight="321.0" prefWidth="231.0">
                            <children>
-                              <AnchorPane prefHeight="55.0" prefWidth="231.0" style="-fx-background-color: white;" />
+                              <AnchorPane fx:id="notificationPaneTemplate" prefHeight="55.0" prefWidth="231.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <Label prefHeight="39.0" prefWidth="150.0" text="Notificiations">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                            </children>
                         </VBox>
                      </content>

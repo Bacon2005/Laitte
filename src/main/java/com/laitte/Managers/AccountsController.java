@@ -87,6 +87,7 @@ public class AccountsController {
         nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
         Circle clip = new Circle(50, 50, 50);
         profilePic.setClip(clip);
+
         loadEmployees();
 
         double hiddenX = -200; // sidebar width
@@ -130,6 +131,11 @@ public class AccountsController {
     @FXML
     private void inventoryBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory Scene
+    }
+
+    @FXML
+    private void ordersBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
     }
 
     // -----------------------------------------------------------------------------------------------------------------------------------//
