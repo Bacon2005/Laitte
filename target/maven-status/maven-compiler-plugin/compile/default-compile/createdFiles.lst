@@ -1,9 +1,0 @@
-com\laitte\LaitteMain\Main.class
-com\laitte\Managers\HomepageController.class
-com\laitte\Managers\SceneController.class
-com\laitte\Managers\MenuCardController.class
-com\laitte\Managers\MenupageController.class
-com\laitte\Model\MenuItem.class
-com\laitte\Managers\LoginController.class
-com\laitte\LaitteMain\Database.class
-com\laitte\LaitteMain\TestConnection.class
