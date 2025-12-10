@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.MenupageController">
+   <children>
+      <!-- Decorative Images -->
+      <ImageView fitHeight="261.0" fitWidth="709.0" layoutX="111.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true" rotate="-39.5">
+         <image>
+            <Image url="@../Images/Extras/Leaves.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="261.0" fitWidth="580.0" layoutX="751.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true" rotate="-37.7">
+         <image>
+            <Image url="@../Images/Extras/Leaves.png" />
+         </image>
+      </ImageView>
+
+      <!-- ScrollPane for Menu Items -->
+      <HBox cacheShape="false" centerShape="false" layoutX="60.0" layoutY="234.0" prefHeight="447.0" prefWidth="699.0" scaleShape="false">
+         <children>
+            <ScrollPane fx:id="scrollPaneMenu" maxHeight="1.7976931348623157E308" prefHeight="417.0" prefWidth="909.0" style="-fx-background-insets: 0; -fx-padding: 0;" vbarPolicy="NEVER" visible="true">
+               <content>
+                  <VBox fx:id="vboxMenuItems" focusTraversable="true" maxWidth="-Infinity" prefHeight="2714.0" prefWidth="693.0" spacing="20.0" style="-fx-background-color: transparent;" />
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+
+      <!-- Menu Title -->
+      <Pane layoutX="51.0" layoutY="134.0" prefHeight="73.0" prefWidth="167.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 20;">
+         <children>
+            <Pane layoutX="9.0" layoutY="10.0" prefHeight="53.0" prefWidth="150.0" style="-fx-background-color: White; -fx-background-radius: 15;">
+               <children>
+                  <Label layoutX="21.0" layoutY="-2.0" text="Menu">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+
+      <!-- ComboBoxes for filtering -->
+      <ComboBox fx:id="mealType" layoutX="240.0" layoutY="156.0" prefHeight="25.0" prefWidth="105.0" promptText="Meal Type" />
+      <ComboBox fx:id="mealCategory" layoutX="365.0" layoutY="157.0" prefHeight="25.0" prefWidth="122.0" promptText="Meal Category" />
+
+      <!-- Side Slider Panel -->
+      <AnchorPane fx:id="slider" prefHeight="726.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-pic">
+                     <image>
+                        <Image url="@../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+
+            <!-- Navigation Buttons -->
+            <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="492.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
+               <children>
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="36.0" prefWidth="200.0" styleClass="my-button" text=" Home">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="menu" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button active" text=" Menu">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="orders" mnemonicParsing="false" onAction="#goToOrdersPage" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#goToInventoryPage" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="analytics" mnemonicParsing="false" onAction="#goToAnalyticsPage" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+
+            <!-- Settings & Logout -->
+            <HBox layoutX="20.0" layoutY="585.0" prefHeight="65.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="585.0">
+               <children>
+                  <Button fx:id="settingBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="825.0" layoutY="-11.0" prefHeight="746.0" prefWidth="264.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3);" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="25.0" layoutY="670.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="221.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Place Order">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="RIGHT" layoutX="93.0" layoutY="19.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="149.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="EDIT ORDERS">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Icons/Edit%20(button).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Line endX="80.0" endY="-2.288818359375E-5" layoutX="184.0" layoutY="83.0" startX="-152.44622802734375" startY="-1.52587890625E-5" stroke="WHITE" style="-fx-fill: white;" />
+            <AnchorPane layoutX="24.0" layoutY="496.0" prefHeight="159.0" prefWidth="220.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);; -fx-background-radius: 25;">
+               <children>
+                  <Line endX="10.14263916015625" layoutX="178.0" layoutY="105.0" startX="-152.44622802734375" startY="-1.52587890625E-5" style="-fx-fill: white;" AnchorPane.leftAnchor="24.846664428710938" AnchorPane.rightAnchor="31.153335571289062" AnchorPane.topAnchor="104.292877972126" />
+                  <HBox prefHeight="26.0" prefWidth="195.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="118.0">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="112.0" text="Total Amount" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="26.0" prefWidth="22.0" />
+                        <Label prefHeight="25.0" prefWidth="72.0" text="₱325.00" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="-4.0" prefHeight="92.0" prefWidth="211.0" style="-fx-background-color: no color;" vbarPolicy="NEVER" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="10.0">
+                     <content>
+                        <VBox prefHeight="399.0" prefWidth="213.0" spacing="10.0">
+                           <children>
+                              <HBox prefHeight="41.0" prefWidth="189.0">
+                                 <children>
+                                    <Label prefHeight="19.0" prefWidth="29.0" text="1x">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="40.0" prefWidth="98.0" text="Chicken Breakfast Wrap" textFill="#535353" wrapText="true" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Region prefHeight="47.0" prefWidth="27.0" />
+                                    <Label prefHeight="25.0" prefWidth="70.0" text="₱325.00" textFill="#535353" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="47.0" prefWidth="192.0">
+                                 <children>
+                                    <Label prefHeight="19.0" prefWidth="29.0" text="1x">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="47.0" prefWidth="94.0" text="Fruit Oat Pancakes" textFill="#535353" wrapText="true" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Region prefHeight="47.0" prefWidth="27.0" />
+                                    <Label prefHeight="25.0" prefWidth="70.0" text="₱325.00" textFill="#535353" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <HBox layoutX="29.0" layoutY="109.0" prefHeight="365.0" prefWidth="212.0" spacing="10.0">
+               <children>
+                  <ScrollPane prefHeight="348.0" prefWidth="260.0">
+                     <content>
+                        <VBox fx:id="vboxSelectedItems" prefHeight="524.0" prefWidth="210.0" spacing="10.0" style="-fx-background-color: transpa;">
+                           <children>
+                              <AnchorPane prefHeight="90.0" prefWidth="210.0">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                           </children></VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <ImageView fitHeight="261.0" fitWidth="709.0" layoutX="-332.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Extras/Leaves.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="87.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="67.0" fitWidth="96.0" layoutX="134.0" layoutY="31.0">
+         <image>
+            <Image url="@../Images/Logo/Logo%20Name.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="129.0" layoutX="15.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Logo/Logo%20with%20bg.png" />
+         </image>
+      </ImageView>
+
+   </children>
+</AnchorPane>
