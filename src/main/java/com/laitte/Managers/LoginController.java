@@ -11,15 +11,12 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 
 public class LoginController implements Initializable {
@@ -29,10 +26,6 @@ public class LoginController implements Initializable {
     // ---------------------------------------------------------------------------//
 
     // --------------------------- Variables for FXML ----------------------------//
-
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     private CheckBox checkBox;
@@ -46,6 +39,8 @@ public class LoginController implements Initializable {
     private ImageView coffeeImage;
     @FXML
     private ImageView leavesImage;
+    @FXML
+    private AnchorPane invalid;
     // --------------------------------------------------------------------------//
 
     // --------------------------- Animation ----------------------------//
@@ -77,7 +72,13 @@ public class LoginController implements Initializable {
 
     public boolean validateLogin(String username, String password) {
 
-        String query = "SELECT * FROM \"Laitte\".\"users\" WHERE username = ? AND password = ?";
+        String query = """
+                SELECT e.firstname, l.loginid, l.username, l.password, e2.ismanager
+                FROM employee e
+                JOIN login l ON e.loginid = l.loginid
+                join employeerole e2 on e.roleid = e2.roleid
+                WHERE l.username = ? AND l.password = ?
+                                            """;
 
         try (Connection conn = com.laitte.LaitteMain.Database.connect();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -88,6 +89,10 @@ public class LoginController implements Initializable {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                String firstName = rs.getString("firstname");
+                boolean manager = rs.getBoolean("ismanager");
+                Session.setUsername(firstName);
+                Session.setManager(manager); // checks if manager or not
                 return true; // Valid credentials
             } else {
                 return false; // Invalid credentials
@@ -104,21 +109,11 @@ public class LoginController implements Initializable {
         password = passwordField.getText();
 
         if (validateLogin(username, password)) {
-            System.out.println("Login successful!"); // Successful login message
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Homepage.fxml")); // Load Homepage
-                                                                                               // FXML file
-            root = loader.load();
-            HomepageController homepageController = loader.getController();
-            homepageController.initialize(); // Pass username to HomepageController
-            homepageController.setUsername(username);
-            stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null);
 
         } else {
             System.out.println("Invalid credentials.");
+            invalid.setVisible(true);
         }
     }
 
