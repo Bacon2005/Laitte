@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL
 );
 
-INSERT INTO users (username, password) 
+INSERT INTO users (username, password)
 VALUES
-    ('admin', '1234'), 
+    ('admin', '1234'),
     ('Tyrone', 'cafe');
 -- Add more initial users as needed
