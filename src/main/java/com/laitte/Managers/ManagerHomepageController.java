@@ -84,5 +84,11 @@ public class ManagerHomepageController {
     private void inventoryBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory
     }
+
+    @FXML
+    private void analyticsBtn(ActionEvent event) throws IOException{
+            SceneController.switchScene(event, "/FXML/Analytics.fxml", null); // Switch to Inventory
+    }
+
     // ------------------------------------------------------------------------------------------------------------------------------------//
 }

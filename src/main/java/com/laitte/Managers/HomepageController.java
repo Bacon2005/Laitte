@@ -83,6 +83,4 @@ public class HomepageController {
     private void inventory(ActionEvent event) throws IOException {
     SceneController.switchScene(event, "/FXML/Inventory.fxml", null);
     }
-
-
 }

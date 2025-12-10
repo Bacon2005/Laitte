@@ -1,20 +1,296 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/InventoryStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.InventoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.AnalyticsController">
    <children>
-      <AnchorPane layoutX="19.0" layoutY="16.0" prefHeight="217.0" prefWidth="330.0" />
-      <BarChart layoutX="18.0" layoutY="245.0" prefHeight="469.0" prefWidth="633.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
+      <ImageView fitHeight="749.0" fitWidth="371.0" layoutX="-22.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-22.0" AnchorPane.topAnchor="-12.0">
+         <image>
+            <Image url="@../Images/CoffeePlaceBG.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="199.0" prefHeight="210.0" prefWidth="884.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane layoutX="19.0" layoutY="89.0" prefHeight="89.0" prefWidth="170.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="19.0">
+               <children>
+                  <Pane layoutX="9.0" layoutY="10.0" prefHeight="69.0" prefWidth="151.0" style="-fx-background-color: White; -fx-background-radius: 15;">
+                     <children>
+                        <Label accessibleRole="PARENT" layoutX="19.0" layoutY="6.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: system;" text="Gross revenue">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelGrossRev" accessibleRole="PARENT" layoutX="19.0" layoutY="36.0" prefHeight="27.0" prefWidth="120.0" style="-fx-font-family: system; -fx-font-size: 18;" text="Php. 00.00">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane layoutX="214.0" layoutY="99.0" prefHeight="89.0" prefWidth="190.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="214.0">
+               <children>
+                  <Pane layoutX="9.0" layoutY="10.0" prefHeight="69.0" prefWidth="171.0" style="-fx-background-color: White; -fx-background-radius: 15;">
+                     <children>
+                        <Label accessibleRole="PARENT" layoutX="9.0" layoutY="6.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: system;" text="Orders completed">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelOrdersCompleted" accessibleRole="PARENT" layoutX="9.0" layoutY="36.0" prefHeight="27.0" prefWidth="150.0" style="-fx-font-family: system; -fx-font-size: 18;" text="0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane layoutX="432.0" layoutY="99.0" prefHeight="89.0" prefWidth="227.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="432.0">
+               <children>
+                  <Pane layoutX="9.0" layoutY="10.0" prefHeight="69.0" prefWidth="209.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                     <children>
+                        <Label accessibleRole="PARENT" layoutX="7.0" layoutY="4.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: system;" text="Avg revenue per order">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelAvgRevOrder" accessibleRole="PARENT" layoutX="7.0" layoutY="34.0" prefHeight="27.0" prefWidth="191.0" style="-fx-font-family: system; -fx-font-size: 18;" text="Php. 00.00">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane layoutX="685.0" layoutY="99.0" prefHeight="89.0" prefWidth="168.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="685.0">
+               <children>
+                  <Pane layoutX="9.0" layoutY="10.0" prefHeight="69.0" prefWidth="151.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                     <children>
+                        <Label accessibleRole="PARENT" layoutX="8.0" layoutY="6.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: system;" text="New customers">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelNewCustomers" accessibleRole="PARENT" layoutX="8.0" layoutY="36.0" prefHeight="27.0" prefWidth="130.0" style="-fx-font-family: system; -fx-font-size: 18;" text="0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane layoutX="14.0" layoutY="7.0" prefHeight="76.0" prefWidth="219.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                     <children>
+                        <Label accessibleRole="PARENT" layoutX="14.0" layoutY="-4.0" prefHeight="58.0" prefWidth="178.0" style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-font-family: system;" text="Analytics">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="199.0" layoutY="209.0" prefHeight="524.0" prefWidth="884.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Pane layoutX="18.0" layoutY="13.0" prefHeight="498.0" prefWidth="612.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="18.0">
+               <children>
+                  <Pane layoutX="8.0" layoutY="45.0" prefHeight="445.0" prefWidth="596.0" style="-fx-background-color: White; -fx-background-radius: 15;" />
+                  <LineChart fx:id="chLineChart" layoutX="20.0" layoutY="57.0" prefHeight="419.0" prefWidth="573.0" style="-fx-background-color: white;">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </LineChart>
+                  <DatePicker fx:id="datepicker" layoutX="11.0" layoutY="10.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="648.0" layoutY="13.0" prefHeight="498.0" prefWidth="219.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="648.0">
+               <children>
+                  <AnchorPane fx:id="ancpnMealImg" layoutX="30.0" layoutY="43.0" prefHeight="161.0" prefWidth="161.0" style="-fx-background-color: white; -fx-background-radius: 15;" />
+                  <Pane layoutX="5.0" layoutY="214.0" prefHeight="280.0" prefWidth="209.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                     <children>
+                        <Label fx:id="labelMealName" contentDisplay="TOP" layoutX="6.0" layoutY="5.0" prefHeight="54.0" prefWidth="199.0" style="-fx-font-size: 12; -fx-font-family: system; -fx-font-weight: bold;" text="Oat pancakes with Blueberries" wrapText="true" />
+                        <Label fx:id="labelMealID" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="4.0" layoutY="62.0" prefHeight="15.0" prefWidth="199.0" text=" ID: 00-00000">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelMealPrice" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="6.0" layoutY="76.0" prefHeight="27.0" prefWidth="199.0" style="-fx-font-family: system; -fx-font-weight: bold; -fx-font-size: 18;" text="Php. 00.00" />
+                        <Label fx:id="labelMealCategory" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="234.0" prefHeight="20.0" prefWidth="199.0" style="-fx-font-family: system; -fx-font-size: 14; -fx-font-weight: normal;" text="Category: Breakfast">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelMealType" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="255.0" prefHeight="20.0" prefWidth="199.0" style="-fx-font-family: system; -fx-font-size: 14; -fx-font-weight: normal;" text="Type: Vegetarian">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelMealDescription" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="107.0" prefHeight="120.0" prefWidth="199.0" text="Oat pancakes with Strawberries, topped with whipped cream, powdered sugar and drizzled with corn syrup" wrapText="true">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ComboBox fx:id="comboxHLSalesCat" layoutX="29.0" layoutY="8.0" prefHeight="27.0" prefWidth="161.0" promptText="Highest/Lowest sales" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="slider" layoutX="20.0" layoutY="20.0" prefHeight="737.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-pic">
+                     <image>
+                        <Image url="@../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="493.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
+               <children>
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#homeBtn" prefHeight="36.0" prefWidth="200.0" styleClass="my-button" text=" Home">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Home%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="menu" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Menu">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Menu%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="orders" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Order%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Inventory%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="analytics" mnemonicParsing="false" onAction="#analytics" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Analytics%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="Accounts" mnemonicParsing="false" onAction="#AccountsBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text="Accounts">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/LogoCafe.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <HBox layoutX="20.0" layoutY="631.0" prefHeight="81.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="631.0">
+               <children>
+                  <Button fx:id="settingBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Icon%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../Images/Log%20out.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

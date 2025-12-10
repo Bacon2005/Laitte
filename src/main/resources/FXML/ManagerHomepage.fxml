@@ -184,7 +184,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="analytics" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                  <Button fx:id="analytics" mnemonicParsing="false" onAction="#analytics" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
                      <font>
                         <Font size="16.0" />
                      </font>
