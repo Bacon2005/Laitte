@@ -162,11 +162,7 @@
                   <VBox fx:id="currentOrdersVbox" prefHeight="369.0" prefWidth="238.0" spacing="10.0" />
                </content>
             </ScrollPane>
-<<<<<<< HEAD
             <Button fx:id="placeOrder" layoutX="39.0" layoutY="669.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="39.0" prefWidth="186.0" style="-fx-background-color: #ffffff; -fx-background-radius: 25;" text="Place Order">
-=======
-            <Button layoutX="39.0" layoutY="669.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" style="-fx-background-color: #ffffff; -fx-background-radius: 25;" text="Place Order">
->>>>>>> 003be9e978c74982944e34b4ef581db099a2957a
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
@@ -275,11 +271,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-<<<<<<< HEAD
                   <Button fx:id="orders" mnemonicParsing="false" onAction="#ordersBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
-=======
-                  <Button fx:id="orders" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
->>>>>>> 003be9e978c74982944e34b4ef581db099a2957a
                      <font>
                         <Font size="16.0" />
                      </font>
