@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -44,6 +45,8 @@ public class ManagerHomepageController {
     private AnchorPane notificationPane;
     @FXML
     private Button ordersBtn;
+    @FXML
+    private Button settingsBtn;
 
     // --------------------------------------------------------------------------//
 
@@ -57,6 +60,9 @@ public class ManagerHomepageController {
 
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
         profilePic.setClip(clip);
+
+        Image image = new Image(Session.getProfileImage());
+        profilePic.setImage(image);
 
         double hiddenX = -200; // sidebar width
         slider.setTranslateX(hiddenX);
@@ -78,7 +84,7 @@ public class ManagerHomepageController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
-        nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
+        nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
 
         notificationPane.setVisible(false);
     }
@@ -105,9 +111,14 @@ public class ManagerHomepageController {
         SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
     }
 
-     @FXML
+    @FXML
     private void menuBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/Menu/MenuPage.fxml", null); // Switch to Menu
+        SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
+    }
+
+    @FXML
+    private void settingsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Settings
     }
     // -----------------------------------------------------------------------//
 

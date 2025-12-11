@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,62 +11,96 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/InventoryStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.InventoryController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.SettingsController">
    <children>
-      <Label fx:id="inventory_title" layoutX="128.0" layoutY="52.0" text="INVENTORY MANAGEMENT">
-         <font>
-            <Font name="Avenir Black Oblique" size="23.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="98.0" fitWidth="109.0" layoutX="1.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="23.66666666666667" AnchorPane.topAnchor="20.0">
+      <ImageView fitHeight="779.0" fitWidth="714.0" layoutX="-180.0" layoutY="-20.0" pickOnBounds="true" styleClass="blur-image">
          <image>
-            <Image url="@../Images/Logo%20with%20circle.png" />
+            <Image url="@../../Images/bgimager.jpg" />
          </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
       </ImageView>
-      <Button fx:id="m_inventory_delete" layoutX="948.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_delete" prefHeight="35.0" prefWidth="98.0" styleClass="m_inventory_add" text="- Delete Item" AnchorPane.rightAnchor="17.0" />
-      <TableView fx:id="inventoryTable" layoutY="132.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1083.0" styleClass="inventory_table" stylesheets="@../CSS/InventoryStyle.css" AnchorPane.bottomAnchor="0.0">
-        <columns>
-          <TableColumn fx:id="mealId" minWidth="50.0" prefWidth="137.62036323547363" text="Meal ID" />
-          <TableColumn fx:id="mealName" minWidth="0.0" prefWidth="167.9622802734375" text="Meal Name" />
-            <TableColumn fx:id="stockAvailable" minWidth="0.5546112060546875" prefWidth="162.79391479492188" text="Stock Available" />
-            <TableColumn fx:id="stockDate" minWidth="0.5546112060546875" prefWidth="168.87298583984375" text="Stock Date" />
-            <TableColumn fx:id="Category" prefWidth="162.7784423828125" text="Category" />
-            <TableColumn fx:id="mealType" prefWidth="156.43658447265625" text="Meal Type" />
-            <TableColumn fx:id="price" prefWidth="121.50006103515625" text="Price" />
-        </columns>
-      </TableView>
-      <ImageView fitHeight="546.0" fitWidth="501.0" layoutX="804.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" rotate="-60.3">
+      <ImageView fitHeight="740.0" fitWidth="606.0" layoutX="527.0" layoutY="-2.0" pickOnBounds="true" styleClass="blur-image">
          <image>
-            <Image url="@../Images/Leaves.png" />
+            <Image url="@../../Images/0aa41685d97ecafae58935dc6fa0cc8e.jpg" />
          </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
       </ImageView>
-      <Button fx:id="m_inventory_add" layoutX="857.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_add" prefHeight="35.0" prefWidth="96.0" styleClass="m_inventory_add" text="+ Add Item" />
-      <AnchorPane fx:id="noselected" layoutX="698.0" layoutY="62.0" prefHeight="31.0" prefWidth="137.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;" visible="false">
+      <AnchorPane layoutX="75.0" layoutY="34.0" prefHeight="654.0" prefWidth="955.0" style="-fx-background-color: white; -fx-background-radius: 30;" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="34.0">
          <children>
-            <Label layoutX="10.0" layoutY="4.0" prefHeight="25.0" prefWidth="137.0" text="No row is selected" textFill="#e10000">
+            <Label layoutX="37.0" layoutY="13.0" prefHeight="100.0" prefWidth="275.0" text="Account Settings">
                <font>
-                  <Font size="16.0" />
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button layoutX="126.0" layoutY="378.0" mnemonicParsing="false" text="Change Picture" />
+            <Label layoutX="373.0" layoutY="126.0" prefHeight="26.0" prefWidth="60.0" text="NAME:" textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="373.0" layoutY="204.0" prefHeight="25.0" prefWidth="118.0" text="POSITION:" textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="373.0" layoutY="294.0" prefHeight="25.0" prefWidth="118.0" text="USERNAME:" textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="profilePicView" fitHeight="221.0" fitWidth="221.0" layoutX="64.0" layoutY="120.0" pickOnBounds="true" styleClass="profile-pic">
+               <image>
+                  <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="373.0" layoutY="390.0" prefHeight="25.0" prefWidth="118.0" text="PASSWORD: " textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" layoutX="491.0" layoutY="126.0" prefHeight="26.0" prefWidth="268.0" text="firstname + lastname">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="role" layoutX="491.0" layoutY="204.0" prefHeight="26.0" prefWidth="268.0" text="role">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="displayUsername" layoutX="491.0" layoutY="294.0" prefHeight="26.0" prefWidth="268.0" text="username">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="491.0" layoutY="390.0" prefHeight="26.0" prefWidth="268.0" text="password">
+               <font>
+                  <Font name="System Bold" size="17.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="false" styleClass="profile-pic">
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" styleClass="profile-pic">
                      <image>
-                        <Image url="@../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+                        <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="50.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/Logo.png" />
+                        <Image url="@../../Images/Logo.png" />
                      </image>
                   </ImageView>
                </children>
@@ -81,7 +114,7 @@
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Home%20Button.png" />
+                              <Image url="@../../Images/Home%20Button.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -93,31 +126,31 @@
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Menu%20Button.png" />
+                              <Image url="@../../Images/Menu%20Button.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="orders" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
+                  <Button fx:id="ordersBtn" mnemonicParsing="false" onAction="#ordersBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Order%20Button.png" />
+                              <Image url="@../../Images/Order%20Button.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventoryBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Inventory%20Button.png" />
+                              <Image url="@../../Images/Inventory%20Button.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -129,7 +162,7 @@
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Analytics%20Button.png" />
+                              <Image url="@../../Images/Analytics%20Button.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -141,7 +174,7 @@
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/LogoCafe.png" />
+                              <Image url="@../../Images/LogoCafe.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -150,14 +183,14 @@
             </VBox>
             <HBox layoutX="20.0" layoutY="631.0" prefHeight="81.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="631.0">
                <children>
-                  <Button fx:id="settingBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                  <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#settingsBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Icon%20(1).png" />
+                              <Image url="@../../Images/Icon%20(1).png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -169,7 +202,7 @@
                      <graphic>
                         <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                            <image>
-                              <Image url="@../Images/Log%20out.png" />
+                              <Image url="@../../Images/Log%20out.png" />
                            </image>
                         </ImageView>
                      </graphic>

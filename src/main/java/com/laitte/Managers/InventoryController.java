@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.laitte.LaitteMain.Database;
-import com.laitte.Managers.SceneController;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -21,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -108,10 +108,14 @@ public class InventoryController {
 
         loadTableData();
 
+        nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
+
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
 
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
         profilePic.setClip(clip);
+        Image image = new Image(Session.getProfileImage());
+        profilePic.setImage(image);
 
         double hiddenX = -200; // sidebar width
         slider.setTranslateX(hiddenX);
@@ -219,19 +223,33 @@ public class InventoryController {
     }
 
     @FXML
-    private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
-    }
-
-    @FXML
     private void AccountsBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
     @FXML
+    private void inventoryBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory
+    }
+
+    @FXML
     private void ordersBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
-                                                                                                // Scene
+    }
+
+    @FXML
+    private void menuBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
+    }
+
+    @FXML
+    private void settingsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Settings
+    }
+
+    @FXML
+    private void homeBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
     }
 
     // --------------------------------------------------------------------------//
