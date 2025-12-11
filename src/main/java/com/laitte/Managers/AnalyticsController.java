@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.laitte.LaitteMain.Database;
-import com.laitte.Managers.MealSales;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -23,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -68,8 +68,18 @@ public class AnalyticsController {
 
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
 
+        if (Session.getManager()) {
+            Accounts.setVisible(true);
+        } else {
+            Accounts.setVisible(false);
+        }
+        slider.setVisible(true); // ensures that Slider is visible and can be interacted with
+
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
         profilePic.setClip(clip);
+
+        Image image = new Image(Session.getProfileImage());
+        profilePic.setImage(image);
 
         double hiddenX = -200; // sidebar width
         slider.setTranslateX(hiddenX);
@@ -91,7 +101,8 @@ public class AnalyticsController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
-        
+        nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
+
         // ----------------------------- When you pick date -----------------------------//
         datepicker.setOnAction(event -> {
         LocalDate selectedDate = datepicker.getValue();

@@ -1,12 +1,8 @@
 package com.laitte.Managers;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.time.LocalDate;
 import java.util.List;
 
-import com.laitte.LaitteMain.Database;
-import com.laitte.Managers.Menu.CustomerNameController;
 import com.laitte.Managers.Menu.Meal;
 import com.laitte.Managers.Menu.MealDAO;
 import com.laitte.Managers.Menu.mealsPaneController;
