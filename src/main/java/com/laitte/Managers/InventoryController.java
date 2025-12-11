@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -107,10 +108,14 @@ public class InventoryController {
 
         loadTableData();
 
+        nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
+
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
 
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
         profilePic.setClip(clip);
+        Image image = new Image(Session.getProfileImage());
+        profilePic.setImage(image);
 
         double hiddenX = -200; // sidebar width
         slider.setTranslateX(hiddenX);

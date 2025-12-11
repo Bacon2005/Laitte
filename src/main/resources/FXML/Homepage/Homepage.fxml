@@ -115,7 +115,7 @@
             <Image url="@../../Images/Leaves.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="slider" prefHeight="726.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="slider" prefHeight="726.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -124,7 +124,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-pic">
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" styleClass="profile-pic">
                      <image>
                         <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
                      </image>
@@ -214,7 +214,7 @@
             </VBox>
             <HBox layoutX="20.0" layoutY="631.0" prefHeight="81.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="631.0">
                <children>
-                  <Button fx:id="settingBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                  <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#settingsBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
                      <font>
                         <Font size="16.0" />
                      </font>

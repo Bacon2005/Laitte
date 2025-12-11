@@ -16,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -83,10 +83,12 @@ public class AccountsController {
     // --------------------------------------------------------------------------//
     public void initialize() {
         slider.setVisible(true);
-        System.out.println(Session.getUsername());
-        nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
+        System.out.println(Session.getFirstname());
+        nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
         Circle clip = new Circle(50, 50, 50);
         profilePic.setClip(clip);
+        Image image = new Image(Session.getProfileImage());
+        profilePic.setImage(image);
 
         loadEmployees();
 

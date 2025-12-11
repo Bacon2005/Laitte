@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
     public boolean validateLogin(String username, String password) {
 
         String query = """
-                SELECT e.firstname, l.loginid, l.username, l.password, e2.ismanager
+                SELECT e.firstname, l.loginid, l.username, l.password, e2.ismanager, e.imagepath, e.lastname, e2.rolename
                 FROM employee e
                 JOIN login l ON e.loginid = l.loginid
                 join employeerole e2 on e.roleid = e2.roleid
@@ -91,8 +91,16 @@ public class LoginController implements Initializable {
             if (rs.next()) {
                 String firstName = rs.getString("firstname");
                 boolean manager = rs.getBoolean("ismanager");
-                Session.setUsername(firstName);
+                String imagePath = rs.getString("imagepath");
+                String lastname = rs.getString("lastname");
+                String user = rs.getString("username");
+                String role = rs.getString("rolename");
+                Session.setUsername(user);
+                Session.setFirstname(firstName); // gets first name
+                Session.setLastname(lastname);
                 Session.setManager(manager); // checks if manager or not
+                Session.setRole(role);
+                Session.setProfileImagePath("/Images/ProfilePhotos/" + imagePath); // gets image path
                 return true; // Valid credentials
             } else {
                 return false; // Invalid credentials
