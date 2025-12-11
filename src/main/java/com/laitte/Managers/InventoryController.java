@@ -243,8 +243,6 @@ public class InventoryController {
     }
 
     @FXML
-    private void analytics(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
     private void menuBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
     }
@@ -256,7 +254,12 @@ public class InventoryController {
 
     @FXML
     private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to home
+    }
+
+    @FXML
+    private void analyticsBtn(ActionEvent event) throws IOException{
+        SceneController.switchScene(event, "/FXML/AnalyticasPage.fxml", null);
     }
 
     // --------------------------------------------------------------------------//

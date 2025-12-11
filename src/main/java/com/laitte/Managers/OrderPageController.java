@@ -273,10 +273,9 @@ public class OrderPageController {
     }
 
     @FXML
-    private void analytics(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
+    private void analyticsBtn(ActionEvent event) throws IOException{
+        SceneController.switchScene(event, "/FXML/AnalytisPage.fxml", null);
     }
-    
     // -------------------------------------------------------------------//
 
     private void loadOrders() {

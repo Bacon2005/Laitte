@@ -143,6 +143,9 @@ public class AccountsController {
     @FXML
     private void analytics(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
+    }
+
+    @FXML
     private void menuBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
     }

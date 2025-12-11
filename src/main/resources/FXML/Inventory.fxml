@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,6 +15,20 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/InventoryStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.InventoryController">
    <children>
+      <AnchorPane fx:id="m_inventory_search_anchor" layoutX="617.0" layoutY="44.0" prefHeight="37.0" prefWidth="293.0" styleClass="m_inventory_search_anchor">
+         <children>
+            <TextField fx:id="m_inventory_search" layoutX="13.0" layoutY="7.0" prefHeight="37.0" prefWidth="234.0" promptText="Search..." styleClass="m_inventory_search">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="53.0" fitWidth="67.0" layoutX="245.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Search.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <Label fx:id="inventory_title" layoutX="128.0" layoutY="52.0" text="INVENTORY MANAGEMENT">
          <font>
             <Font name="Avenir Black Oblique" size="23.0" />
@@ -24,8 +39,12 @@
             <Image url="@../Images/Logo%20with%20circle.png" />
          </image>
       </ImageView>
-      <Button fx:id="m_inventory_delete" layoutX="948.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_delete" prefHeight="35.0" prefWidth="98.0" styleClass="m_inventory_add" text="- Delete Item" AnchorPane.rightAnchor="17.0" />
-      <TableView fx:id="inventoryTable" layoutY="132.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1083.0" styleClass="inventory_table" stylesheets="@../CSS/InventoryStyle.css" AnchorPane.bottomAnchor="0.0">
+      <Button fx:id="m_inventory_add" layoutX="912.0" layoutY="41.0" mnemonicParsing="false" onAction="#m_inventory_add" prefHeight="55.0" prefWidth="122.0" styleClass="m_inventory_add" text="+ Add Item" AnchorPane.rightAnchor="23.67">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <TableView fx:id="inventoryTable" layoutY="132.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1081.0" styleClass="inventory_table" stylesheets="@../CSS/InventoryStyle.css" AnchorPane.bottomAnchor="0.0">
         <columns>
           <TableColumn fx:id="mealId" minWidth="50.0" prefWidth="137.62036323547363" text="Meal ID" />
           <TableColumn fx:id="mealName" minWidth="0.0" prefWidth="167.9622802734375" text="Meal Name" />
@@ -33,7 +52,7 @@
             <TableColumn fx:id="stockDate" minWidth="0.5546112060546875" prefWidth="168.87298583984375" text="Stock Date" />
             <TableColumn fx:id="Category" prefWidth="162.7784423828125" text="Category" />
             <TableColumn fx:id="mealType" prefWidth="156.43658447265625" text="Meal Type" />
-            <TableColumn fx:id="price" prefWidth="121.50006103515625" text="Price" />
+            <TableColumn fx:id="price" prefWidth="124.56329345703125" text="Price" />
         </columns>
       </TableView>
       <ImageView fitHeight="546.0" fitWidth="501.0" layoutX="804.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" rotate="-60.3">
@@ -41,26 +60,16 @@
             <Image url="@../Images/Leaves.png" />
          </image>
       </ImageView>
-      <Button fx:id="m_inventory_add" layoutX="857.0" layoutY="61.0" mnemonicParsing="false" onAction="#m_inventory_add" prefHeight="35.0" prefWidth="96.0" styleClass="m_inventory_add" text="+ Add Item" />
-      <AnchorPane fx:id="noselected" layoutX="698.0" layoutY="62.0" prefHeight="31.0" prefWidth="137.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;" visible="false">
+      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="10.0" layoutY="4.0" prefHeight="25.0" prefWidth="137.0" text="No row is selected" textFill="#e10000">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Pane prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="false" styleClass="profile-pic">
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-pic">
                      <image>
                         <Image url="@../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
                      </image>
@@ -110,7 +119,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="current-page-button" text=" Inventory">
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventoryBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -122,7 +131,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="analytics" mnemonicParsing="false" onAction="#analytics" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                  <Button fx:id="analytics" mnemonicParsing="false" onAction="#analyticsBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
                      <font>
                         <Font size="16.0" />
                      </font>

@@ -141,29 +141,45 @@ public class AnalyticsController {
     // ----------------------------- Navigation -----------------------------//
     // Navigation methods are defined outside initialize()
     @FXML
-    private void logoutBtn(ActionEvent event) throws java.io.IOException {
+    private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
     }
 
     @FXML
-    private void homeBtn(ActionEvent event) throws java.io.IOException {
-        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
-    }
-
-    @FXML
-    private void AccountsBtn(ActionEvent event) throws java.io.IOException {
+    private void AccountsBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Accounts Scene
-    }
-
-    @FXML
-    private void ordersBtn(ActionEvent event) throws java.io.IOException {
-        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
     }
 
     @FXML
     private void inventoryBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory
     }
+
+    @FXML
+    private void ordersBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
+    }
+
+    @FXML
+    private void menuBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
+    }
+
+    @FXML
+    private void settingsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Settings
+    }
+
+    @FXML
+    private void homeBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to home
+    }
+
+    @FXML
+    private void analyticsBtn(ActionEvent event) throws IOException{
+        SceneController.switchScene(event, "/FXML/AnalyticasPage.fxml", null);
+    }
+
 
     // -------------------------- for line chart ---------------------------------------------//
     private void updateLineChart(LocalDate date) {
@@ -173,11 +189,13 @@ public class AnalyticsController {
     series.setName("Items Sold");
 
     // Join sales with meal to get meal names
-    String sql = "SELECT m.mealname, COUNT(a.saleid) AS total " +
-                 "FROM analytics a " +
-                 "JOIN meal m ON a.mealid = m.mealid " +
-                 "WHERE a.transactiondate = ? " +
-                 "GROUP BY m.mealname";
+    String sql = """
+            SELECT m.mealname, COUNT(a.analyticsid) AS total
+        FROM analytics a
+        JOIN meal m ON a.mealid = m.mealid
+        WHERE a.transactiondate = ?
+        GROUP BY m.mealname
+            """;
 
     try (Connection conn = Database.connect();
          PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -289,10 +307,10 @@ public class AnalyticsController {
 
 
     // ----------------------------------Deleted Orders------------------------------------//
-        private void updateDeletedOrders(LocalDate date) {
+    private void updateDeletedOrders(LocalDate date) {
     String sql = "SELECT COUNT(*) AS total_cancelled " +
                  "FROM orders o " +
-                 "JOIN analytics a ON o.saleid = a.saleid " +
+                 "JOIN analytics a ON o.analyticsid = a.analyticsid " +
                  "WHERE a.transactiondate = ? AND o.iscancelled = TRUE";
 
     try (Connection conn = Database.connect();
@@ -311,7 +329,8 @@ public class AnalyticsController {
     } catch (Exception e) {
         e.printStackTrace();
         labelCancelledOrders.setText("0");
-    }} 
+    }
+}
 
 
         // ----------------------------------highest lowest shit thats gon make me sewerslide-----------------------------------//
@@ -319,7 +338,7 @@ public class AnalyticsController {
     salesTable.getItems().clear();
 
     String sql =
-        "SELECT m.mealname, COALESCE(COUNT(a.saleid), 0) AS totalSales " +
+        "SELECT m.mealname, COALESCE(COUNT(a.analyticsid), 0) AS totalSales " +
         "FROM meal m " +
         "LEFT JOIN analytics a ON m.mealid = a.mealid AND a.transactiondate = ? " +
         "GROUP BY m.mealname " +
@@ -344,7 +363,8 @@ public class AnalyticsController {
 
     } catch (Exception e) {
         e.printStackTrace();
-    }}
+    }
+}
 
 
 }

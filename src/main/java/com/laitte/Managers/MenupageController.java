@@ -136,7 +136,12 @@ public class MenupageController {
 
     @FXML
     private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to home
+    }
+
+    @FXML
+    private void analyticsBtn(ActionEvent event) throws IOException{
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null);
     }
     // -----------------------------------------------------------------------//
 
