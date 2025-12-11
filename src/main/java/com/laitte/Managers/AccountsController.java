@@ -87,6 +87,7 @@ public class AccountsController {
         nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
         Circle clip = new Circle(50, 50, 50);
         profilePic.setClip(clip);
+
         loadEmployees();
 
         double hiddenX = -200; // sidebar width
@@ -124,7 +125,7 @@ public class AccountsController {
 
     @FXML
     private void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/ManagerHomepage.fxml", null); // Switch to Home Scene
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
     }
 
     @FXML
@@ -132,10 +133,20 @@ public class AccountsController {
         SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory Scene
     }
 
+    @FXML
+    private void ordersBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
+    }
+
+    @FXML
+    private void analytics(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
+    }
+
     // -----------------------------------------------------------------------------------------------------------------------------------//
     @FXML
     private void onAddEmployee(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/AddEmployee.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/EmployeePage/AddEmployee.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setResizable(false);

@@ -36,10 +36,21 @@ public class ManagerHomepageController {
     private AnchorPane slider;
     @FXML
     private ImageView profilePic;
+    @FXML
+    private Button notificationBtn;
+    @FXML
+    private AnchorPane notificationPane;
+    @FXML
+    private Button ordersBtn;
 
     // --------------------------------------------------------------------------//
 
     public void initialize() {
+        if (Session.getManager()) {
+            Accounts.setVisible(true);
+        } else {
+            Accounts.setVisible(false);
+        }
         slider.setVisible(true); // ensures that Slider is visible and can be interacted with
 
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
@@ -66,9 +77,11 @@ public class ManagerHomepageController {
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
         nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
+
+        notificationPane.setVisible(false);
     }
 
-    // ------------------------------------------------------------ Navigation
+    // ----------------------------- Navigation -----------------------------//
 
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
@@ -77,7 +90,7 @@ public class ManagerHomepageController {
 
     @FXML
     private void AccountsBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/StaffMembers.fxml", null); // Switch to Accounts Scene
+        SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
     @FXML
@@ -86,9 +99,20 @@ public class ManagerHomepageController {
     }
 
     @FXML
-    private void analyticsBtn(ActionEvent event) throws IOException{
-            SceneController.switchScene(event, "/FXML/Analytics.fxml", null); // Switch to Inventory
+    private void ordersBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
     }
 
-    // ------------------------------------------------------------------------------------------------------------------------------------//
+    @FXML
+    private void analytics(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
+    }
+
+    // -----------------------------------------------------------------------//
+
+    @FXML
+    private void notificationBtn(ActionEvent event) {
+        notificationPane.setVisible(!notificationPane.isVisible());
+    }
+
 }

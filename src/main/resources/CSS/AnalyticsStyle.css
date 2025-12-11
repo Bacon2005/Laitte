@@ -1,0 +1,57 @@
+/* Table background and rounded edges */
+.salestable {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1px;
+}
+
+/* white bg no stripes for rows */
+.salestable .table-row-cell,
+.salestable .table-row-cell:odd,
+.salestable .table-row-cell:even {
+    -fx-background-color: white;
+}
+
+/* Column header background with top rounded corners */
+.salestable .column-header-background {
+    -fx-background-color: #f0f0f0;
+    -fx-background-insets: 0; /* remove default insets */
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 0;
+}
+
+/* Column header container (clip and round) */
+.salestable .column-header {
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 0;
+}
+
+/* Column header labels with top padding */
+.salestable .column-header .label {
+    -fx-padding: 10px 0 5px 0; /* top right bottom left */
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
+
+/* Rows with bottom border only if they have data */
+.salestable .table-row-cell:filled {
+    -fx-border-color: transparent transparent lightgray transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-background-color: white;
+}
+
+/* Empty rows no border */
+.salestable .table-row-cell:empty {
+    -fx-border-width: 0;
+}
+
+/* Hover effect for rows */
+.salestable .table-row-cell:hover {
+    -fx-background-color: #3FB38E;
+}
+
+

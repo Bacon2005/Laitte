@@ -46,7 +46,7 @@
 }
 
 .table-view .table-row-cell:selected {
-    -fx-background-color: #3FB38E; /* light highlight on hover */
+    -fx-background-color: #3FB38E; 
 }
 
 .table-view .table-cell {

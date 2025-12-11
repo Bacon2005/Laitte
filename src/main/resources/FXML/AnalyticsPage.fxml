@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.AnalyticsController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.AnalyticsController">
    <children>
       <ImageView fitHeight="749.0" fitWidth="371.0" layoutX="-22.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-22.0" AnchorPane.topAnchor="-12.0">
          <image>
@@ -61,7 +63,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane layoutX="432.0" layoutY="99.0" prefHeight="89.0" prefWidth="227.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="432.0">
+            <Pane layoutX="634.0" layoutY="98.0" prefHeight="89.0" prefWidth="227.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="634.0">
                <children>
                   <Pane layoutX="9.0" layoutY="10.0" prefHeight="69.0" prefWidth="209.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <children>
@@ -79,16 +81,16 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane layoutX="685.0" layoutY="99.0" prefHeight="89.0" prefWidth="168.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="685.0">
+            <Pane layoutX="434.0" layoutY="100.0" prefHeight="89.0" prefWidth="168.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="434.0">
                <children>
                   <Pane layoutX="9.0" layoutY="10.0" prefHeight="69.0" prefWidth="151.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                      <children>
-                        <Label accessibleRole="PARENT" layoutX="8.0" layoutY="6.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: system;" text="New customers">
+                        <Label accessibleRole="PARENT" layoutX="8.0" layoutY="6.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-family: system;" text="Cancelled Orders">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelNewCustomers" accessibleRole="PARENT" layoutX="8.0" layoutY="36.0" prefHeight="27.0" prefWidth="130.0" style="-fx-font-family: system; -fx-font-size: 18;" text="0">
+                        <Label fx:id="labelCancelledOrders" accessibleRole="PARENT" layoutX="8.0" layoutY="36.0" prefHeight="27.0" prefWidth="130.0" style="-fx-font-family: system; -fx-font-size: 18;" text="0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -131,41 +133,23 @@
                   <DatePicker fx:id="datepicker" layoutX="11.0" layoutY="10.0" />
                </children>
             </Pane>
-            <Pane layoutX="648.0" layoutY="13.0" prefHeight="498.0" prefWidth="219.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="648.0">
+            <Pane layoutX="648.0" layoutY="33.0" prefHeight="457.0" prefWidth="219.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 15;" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="648.0">
                <children>
-                  <AnchorPane fx:id="ancpnMealImg" layoutX="30.0" layoutY="43.0" prefHeight="161.0" prefWidth="161.0" style="-fx-background-color: white; -fx-background-radius: 15;" />
-                  <Pane layoutX="5.0" layoutY="214.0" prefHeight="280.0" prefWidth="209.0" style="-fx-background-color: white; -fx-background-radius: 15;">
-                     <children>
-                        <Label fx:id="labelMealName" contentDisplay="TOP" layoutX="6.0" layoutY="5.0" prefHeight="54.0" prefWidth="199.0" style="-fx-font-size: 12; -fx-font-family: system; -fx-font-weight: bold;" text="Oat pancakes with Blueberries" wrapText="true" />
-                        <Label fx:id="labelMealID" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="4.0" layoutY="62.0" prefHeight="15.0" prefWidth="199.0" text=" ID: 00-00000">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="labelMealPrice" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="6.0" layoutY="76.0" prefHeight="27.0" prefWidth="199.0" style="-fx-font-family: system; -fx-font-weight: bold; -fx-font-size: 18;" text="Php. 00.00" />
-                        <Label fx:id="labelMealCategory" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="234.0" prefHeight="20.0" prefWidth="199.0" style="-fx-font-family: system; -fx-font-size: 14; -fx-font-weight: normal;" text="Category: Breakfast">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="labelMealType" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="255.0" prefHeight="20.0" prefWidth="199.0" style="-fx-font-family: system; -fx-font-size: 14; -fx-font-weight: normal;" text="Type: Vegetarian">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="labelMealDescription" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="107.0" prefHeight="120.0" prefWidth="199.0" text="Oat pancakes with Strawberries, topped with whipped cream, powdered sugar and drizzled with corn syrup" wrapText="true">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <ComboBox fx:id="comboxHLSalesCat" layoutX="29.0" layoutY="8.0" prefHeight="27.0" prefWidth="161.0" promptText="Highest/Lowest sales" />
+                  <TableView fx:id="salesTable" layoutX="9.0" layoutY="11.0" prefHeight="438.0" prefWidth="200.0" stylesheets="@../CSS/AnalyticsStyle.css">
+                    <columns>
+                      <TableColumn fx:id="colMealName" prefWidth="112.3936767578125" text="Meal Name" />
+                      <TableColumn fx:id="colMealSales" prefWidth="87.10638427734375" text="Sales" />
+                    </columns>
+                     <styleClass>
+                        <String fx:value="salestable" />
+                        <String fx:value="column-header" />
+                     </styleClass>
+                  </TableView>
                </children>
             </Pane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="slider" layoutX="20.0" layoutY="20.0" prefHeight="737.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="slider" layoutX="20.0" layoutY="20.0" prefHeight="726.0" prefWidth="200.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -186,7 +170,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="493.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
+            <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="492.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
                <children>
                   <Button fx:id="home" mnemonicParsing="false" onAction="#homeBtn" prefHeight="36.0" prefWidth="200.0" styleClass="my-button" text=" Home">
                      <font>
@@ -212,7 +196,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="orders" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
+                  <Button fx:id="orders" mnemonicParsing="false" onAction="#ordersBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -224,7 +208,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventoryBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -236,7 +220,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="analytics" mnemonicParsing="false" onAction="#analytics" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                  <Button fx:id="analytics" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
                      <font>
                         <Font size="16.0" />
                      </font>
