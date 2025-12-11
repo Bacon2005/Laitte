@@ -31,7 +31,6 @@ public class AddInventoryController implements Initializable {
     }
     private InventoryController mainController;
 
-    
      public void initialize(URL url, ResourceBundle rb) {
         // Load ComboBox items here
         which_category.getItems().addAll("Breakfast", "Lunch", "Dinner");

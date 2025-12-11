@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.laitte.LaitteMain.Database;
 import com.laitte.Managers.Orders.Orders;
@@ -18,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -104,6 +107,8 @@ public class OrderPageController {
 
         Circle clip = new Circle(50, 50, 50); // centerX, centerY, radius
         profilePic.setClip(clip);
+        Image image = new Image(Session.getProfileImage());
+        profilePic.setImage(image);
 
         double hiddenX = -200; // sidebar width
         slider.setTranslateX(hiddenX);
@@ -125,7 +130,7 @@ public class OrderPageController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
-        nameLabel.setText("Hello, " + Session.getUsername()); // Set username from session
+        nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
 
         // notificationPane.setVisible(false);
 
@@ -137,7 +142,7 @@ public class OrderPageController {
     }
 
     private void totalOrders() {
-        String query = "SELECT COUNT(*) AS totalOrders FROM analytics";
+        String query = "SELECT COUNT(*) AS totalOrders FROM orders";
 
         try (Connection conn = Database.connect();
                 PreparedStatement pstmt = conn.prepareStatement(query);
@@ -248,6 +253,21 @@ public class OrderPageController {
     }
 
     @FXML
+    private void ordersBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
+    }
+
+    @FXML
+    private void menuBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
+    }
+
+    @FXML
+    private void settingsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Settings
+    }
+
+    @FXML
     private void homeBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to home
     }
@@ -260,31 +280,40 @@ public class OrderPageController {
     // -------------------------------------------------------------------//
 
     private void loadOrders() {
-        List<Orders> orders = OrdersDAO.getAllOrders();
+    List<Orders> orders = OrdersDAO.getAllOrders();
 
-        for (Orders ord : orders) {
+    ordersVbox.getChildren().clear();
 
-            // Only load if the order is pending
-            if (!ord.isPending()) {
-                continue; // skip non-pending orders
-            }
+    // Track which customers already have a panel
+    Set<String> loadedCustomers = new HashSet<>();
 
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/OrderList.fxml"));
-                AnchorPane pane = loader.load();
+    for (Orders ord : orders) {
 
-                OrdersPaneController controller = loader.getController();
-                controller.setData(ord.getCustomer(), ord.getNum(), ord.isPending());
+        if (!ord.isPending()) continue; // Only pending orders
 
-                ordersVbox.getChildren().add(pane);
+        String customerKey = ord.getCustomer();
 
-                controller.setParentController(this);
+        // Skip if we've already added a panel for this customer
+        if (loadedCustomers.contains(customerKey)) continue;
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/OrderList.fxml"));
+            AnchorPane pane = loader.load();
+
+            OrdersPaneController controller = loader.getController();
+            controller.setData(ord.getCustomer(), ord.getNum(), ord.isPending());
+
+            ordersVbox.getChildren().add(pane);
+            controller.setParentController(this);
+
+            loadedCustomers.add(customerKey);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+}
+
 
     public void reloadOrders() {
         ordersVbox.getChildren().clear(); // clear existing order panes

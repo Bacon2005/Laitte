@@ -68,7 +68,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-pic">
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="false" styleClass="profile-pic">
                      <image>
                         <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
                      </image>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.SettingsController">
+   <children>
+      <ImageView fitHeight="779.0" fitWidth="714.0" layoutX="-180.0" layoutY="-20.0" pickOnBounds="true" styleClass="blur-image">
+         <image>
+            <Image url="@../../Images/bgimager.jpg" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="740.0" fitWidth="606.0" layoutX="527.0" layoutY="-2.0" pickOnBounds="true" styleClass="blur-image">
+         <image>
+            <Image url="@../../Images/0aa41685d97ecafae58935dc6fa0cc8e.jpg" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
+      <AnchorPane layoutX="75.0" layoutY="34.0" prefHeight="654.0" prefWidth="955.0" style="-fx-background-color: white; -fx-background-radius: 30;" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="34.0">
+         <children>
+            <Label layoutX="37.0" layoutY="13.0" prefHeight="100.0" prefWidth="275.0" text="Account Settings">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button layoutX="126.0" layoutY="378.0" mnemonicParsing="false" text="Change Picture" />
+            <Label layoutX="373.0" layoutY="126.0" prefHeight="26.0" prefWidth="60.0" text="NAME:" textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="373.0" layoutY="204.0" prefHeight="25.0" prefWidth="118.0" text="POSITION:" textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="373.0" layoutY="294.0" prefHeight="25.0" prefWidth="118.0" text="USERNAME:" textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="profilePicView" fitHeight="221.0" fitWidth="221.0" layoutX="64.0" layoutY="120.0" pickOnBounds="true" styleClass="profile-pic">
+               <image>
+                  <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="373.0" layoutY="390.0" prefHeight="25.0" prefWidth="118.0" text="PASSWORD: " textFill="#00000079">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" layoutX="491.0" layoutY="126.0" prefHeight="26.0" prefWidth="268.0" text="firstname + lastname">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="role" layoutX="491.0" layoutY="204.0" prefHeight="26.0" prefWidth="268.0" text="role">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="displayUsername" layoutX="491.0" layoutY="294.0" prefHeight="26.0" prefWidth="268.0" text="username">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="491.0" layoutY="390.0" prefHeight="26.0" prefWidth="268.0" text="password">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="726.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane layoutY="-77.0" prefHeight="811.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" styleClass="profile-pic">
+                     <image>
+                        <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/Logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="492.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
+               <children>
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#homeBtn" prefHeight="36.0" prefWidth="200.0" styleClass="my-button" text=" Home">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Home%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="menu" mnemonicParsing="false" onAction="#menuBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Menu">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Menu%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="ordersBtn" mnemonicParsing="false" onAction="#ordersBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Order%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventoryBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Inventory%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="analytics" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Analytics%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="Accounts" mnemonicParsing="false" onAction="#AccountsBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text="Accounts">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/LogoCafe.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <HBox layoutX="20.0" layoutY="631.0" prefHeight="81.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="631.0">
+               <children>
+                  <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#settingsBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Icon%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../../Images/Log%20out.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

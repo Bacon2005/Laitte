@@ -1,7 +1,7 @@
 /*Style Sheet for Inventory Scene */
 /* . is for specific item and hashtag is for the whole thing*/
 
-.rootPane{
+.rootPane {
     -fx-background-color: WHITE;
 }
 
@@ -18,7 +18,7 @@
     -fx-text-fill: WHITE;
 }
 
-.m_inventory_search{
+.m_inventory_search {
 
     -fx-background-color: WHITE;
     -fx-background-radius: 30;
@@ -27,22 +27,27 @@
     -fx-opacity: 0.5;
 }
 
-.inventory_table{
+.inventory_table {
     -fx-background-color: WHITE;
     -fx-border-color: #DBDBDB;
 }
 
 
 .table-view .table-row-cell {
-    -fx-border-color: transparent white #d3d3d3 white; /* top right bottom left */
-    -fx-border-width: 0 1 1 1; /* only bottom */
+    -fx-border-color: transparent white #d3d3d3 white;
+    /* top right bottom left */
+    -fx-border-width: 0 1 1 1;
+    /* only bottom */
 
 
     -fx-background-color: WHITE;
 
-    -fx-min-height: 50px;   /* minimum row height */
-    -fx-pref-height: 50px;  /* preferred row height */
-    -fx-max-height: 50px;   /* maximum row height */
+    -fx-min-height: 50px;
+    /* minimum row height */
+    -fx-pref-height: 50px;
+    /* preferred row height */
+    -fx-max-height: 50px;
+    /* maximum row height */
 }
 
 .table-view .table-row-cell:selected {
@@ -50,16 +55,8 @@
 }
 
 .table-view .table-cell {
-    -fx-border-color: transparent; 
+    -fx-border-color: transparent;
 
 
-     -fx-padding: 15 20 10 20;
+    -fx-padding: 15 20 10 20;
 }
-
-
-
-
-
-
-
-
