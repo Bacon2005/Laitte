@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.laitte.LaitteMain.Database;
+
 public class OrdersDAO {
     private static final String URL = "jdbc:postgresql://localhost:5432/Laitte";
     private static final String USER = "postgres";
@@ -88,4 +90,18 @@ public class OrdersDAO {
         return 0; // Return zero if error
     }
 
+    public static void insertOrder(int analyticsId, String customerName, int mealId, int quantity, boolean isPending, boolean isCancelled) throws SQLException {
+        String sql = "INSERT INTO orders (analyticsid, customername, mealid, quantity, ispending, iscancelled) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, analyticsId); // use analyticsid here
+            pstmt.setString(2, customerName);
+            pstmt.setInt(3, mealId);
+            pstmt.setInt(4, quantity);
+            pstmt.setBoolean(5, isPending);
+            pstmt.setBoolean(6, isCancelled);
+
+            pstmt.executeUpdate();
+        }
+    }
 }

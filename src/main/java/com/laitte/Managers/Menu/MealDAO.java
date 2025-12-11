@@ -36,7 +36,8 @@ public class MealDAO {
                 String mealCategory = rs.getString("mealcategory");
                 String mealtype = rs.getString("mealtype");
                 String imagePath = rs.getString("photopath");
-                list.add(new Meal(name, price, mealCategory, mealtype, imagePath));
+                int id = rs.getInt("mealid");
+                list.add(new Meal(name, price, mealCategory, mealtype, imagePath, id));
             }
 
         } catch (SQLException e) {

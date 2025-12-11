@@ -1,17 +1,25 @@
 package com.laitte.Managers;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.List;
 
+import com.laitte.LaitteMain.Database;
+import com.laitte.Managers.Menu.CustomerNameController;
 import com.laitte.Managers.Menu.Meal;
 import com.laitte.Managers.Menu.MealDAO;
 import com.laitte.Managers.Menu.mealsPaneController;
+import com.laitte.Managers.Menu.Analytics.AnalyticsDAO;
 import com.laitte.Managers.Menu.CurrentOrder.currentOrderPaneController;
+import com.laitte.Managers.Orders.OrdersDAO;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -20,6 +28,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MenupageController {
@@ -88,6 +98,8 @@ public class MenupageController {
     private VBox MealsVbox;
     @FXML
     private VBox currentOrdersVbox;
+    @FXML
+    private Button placeOrder;
 
     private final int SERVICE_FEE = 50;
     // ----------------------------- Navigation -----------------------------//
@@ -186,7 +198,8 @@ public class MenupageController {
                         meal.getPrice(),
                         meal.getCategory(),
                         meal.getImagePath(),
-                        meal.getType());
+                        meal.getType(),
+                        meal.getId());
 
                 controller.setCurrentOrdersVBox(currentOrdersVbox);
                 controller.setMenuPageController(this);
@@ -199,19 +212,71 @@ public class MenupageController {
         }
     }
 
-    // public void updateTotal() {
-    // int total = 0;
+    public void updateTotal() {
+        int subtotal = 0;
 
-    // for (var node : currentOrdersVbox.getChildren()) {
-    // if (node.getUserData() instanceof currentOrderPaneController) {
-    // currentOrderPaneController controller = (currentOrderPaneController)
-    // node.getUserData();
-    // total += controller.getTotalPrice();
-    // }
-    // }
+        for (var node : currentOrdersVbox.getChildren()) {
+            if (node.getUserData() instanceof currentOrderPaneController) {
+                currentOrderPaneController controller = (currentOrderPaneController) node.getUserData();
+                subtotal += controller.getTotalPrice();
+            }
+        }
 
-    // totalPrice.setText(String.valueOf(total));
-    // serviceFee.setText(String.valueOf(SERVICE_FEE));
-    // subtotalPrice.setText(String.valueOf(total + SERVICE_FEE));
-    // }
+        subtotalPrice.setText(String.valueOf(subtotal)); // sum of meals
+        serviceFee.setText(String.valueOf(SERVICE_FEE)); // 50
+        totalPrice.setText(String.valueOf(subtotal + SERVICE_FEE)); // total = subtotal + service fee
+    }
+
+   @FXML
+public void placeOrder(ActionEvent event) {
+    try {
+        // Load CustomerName.fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Menu/CustomerName.fxml"));
+        Parent root = loader.load();
+
+        // Create a new stage (modal)
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL); // Makes it modal
+        stage.setTitle("Enter Customer Name");
+
+        // Show the window and wait until it's closed
+        stage.showAndWait();
+
+        // Get customer name from session
+        String customerName = Session.getCustomerName();
+        if (customerName == null || customerName.isEmpty()) {
+            System.out.println("Customer name not provided. Order cancelled.");
+            return; // stop if no name
+        }
+
+        int employeeId = Session.getEmployeeId();
+
+        for (var node : currentOrdersVbox.getChildren()) {
+            if (node.getUserData() instanceof currentOrderPaneController) {
+                currentOrderPaneController orderController = (currentOrderPaneController) node.getUserData();
+                int mealId = orderController.getMealId();
+                int quantity = orderController.getQuantity();
+
+                // Insert into analytics and get analyticsid
+                int analyticsId = AnalyticsDAO.insertAnalytics(employeeId, mealId, java.time.LocalDate.now());
+
+                // Insert into orders
+                OrdersDAO.insertOrder(analyticsId, customerName, mealId, quantity, true, false);
+            }
+        }
+
+        // Clear orders and update totals
+        currentOrdersVbox.getChildren().clear();
+        updateTotal();
+
+        System.out.println("Order placed successfully!");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    //Navigation
+
+    
 }

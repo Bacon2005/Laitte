@@ -102,33 +102,38 @@ public class SettingsController {
     // ------------------------------------------------------ Navigation Buttons
     // ---------------------//
     @FXML
-    void AccountsBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Orders
+    private void logoutBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
     }
 
     @FXML
-    void inventoryBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Orders
+    private void AccountsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/EmployeePage/StaffMembers.fxml", null); // Switch to Accounts Scene
     }
 
     @FXML
-    void logoutBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Orders
+    private void inventoryBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Inventory.fxml", null); // Switch to Inventory
     }
 
     @FXML
-    void ordersBtn(ActionEvent event) throws IOException {
+    private void ordersBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
     }
 
     @FXML
-    void settingsBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Orders
+    private void menuBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
     }
 
     @FXML
-    void homeBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Orders
+    private void settingsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Settings
+    }
+
+    @FXML
+    private void homeBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to Home Scene
     }
     // -----------------------------------------------------------------------//
 }

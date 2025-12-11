@@ -57,4 +57,22 @@ public class Session {
     public static String getRole() {
         return role;
     }
+
+    private static int employeeId;
+    public static void setEmployeeId(int id){
+        employeeId = id;
+    }
+
+    public static int getEmployeeId(){
+        return employeeId;
+    }
+
+    private static String customer;
+    public static void setCustomerName(String name){
+        customer = name;
+    }
+
+    public static String getCustomerName(){
+        return customer;
+    }
 }

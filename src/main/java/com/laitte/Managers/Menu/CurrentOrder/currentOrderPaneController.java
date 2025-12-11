@@ -28,11 +28,13 @@ public class currentOrderPaneController {
 
     private int quantity = 0;
     private int price;
+    private int mealId;
 
     // Called when the FXML is loaded
-    public void setData(String name, int price, int quantity, Image mealImage) {
+    public void setData(String name, int price, int quantity, Image mealImage, int mealid) {
         this.price = price;
         this.quantity = quantity;
+        this.mealId = mealid;
 
         mealLabel.setText(name);
         mealPrice.setText(String.valueOf(price));
@@ -45,6 +47,7 @@ public class currentOrderPaneController {
     }
 
     public void changeQuantity(int delta) {
+        System.out.println("Meal: " + getMealName() + ", ID: " + getMealId() + ", Quantity: " + getQuantity() + ", Total: " + getTotalPrice());
         quantity += delta;
         if (quantity < 0)
             quantity = 0;
@@ -68,6 +71,10 @@ public class currentOrderPaneController {
 
     public int getTotalPrice() {
         return price * quantity;
+    }
+
+    public int getMealId(){
+        return mealId;
     }
 
     public void setOnQuantityChange(Consumer<Void> listener) {

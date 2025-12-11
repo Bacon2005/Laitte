@@ -56,14 +56,16 @@ public class mealsPaneController {
     private currentOrderPaneController currentOrderController; // reference to existing panel
     private AnchorPane currentOrderPane;
 
+    private int mealId;
+
     public void initialize() {
         plusMinusPane.setVisible(false);
     }
 
     // ----------------------------- SET DATA -----------------------------
 
-    public void setData(String name, int price, String mealCategory, String imagePath, String mealType) {
-
+    public void setData(String name, int price, String mealCategory, String imagePath, String mealType, int mealId) {
+        this.mealId = mealId; // store meal ID for use in addToOrder
         mealName.setText(name);
         priceLabel.setText(String.valueOf(price));
         category.setText(mealCategory);
@@ -101,73 +103,79 @@ public class mealsPaneController {
         this.menuPageController = controller;
     }
 
-    @FXML
-    private void addToOrderBtn(ActionEvent event) {
-        System.out.println("Add to order clicked");
+   @FXML
+private void addToOrderBtn(ActionEvent event) {
+    System.out.println("Adding to order: " + mealName.getText() + ", ID: " + mealId + ", Price: " + priceLabel.getText());
 
-        // Show the plus/minus panel and hide the "Add to Order" button
-        plusMinusPane.setVisible(true);
-        addToOrder.setVisible(false);
 
-        if (currentOrderController != null) {
-            // Already exists → just increment quantity
-            currentOrderController.changeQuantity(1);
+    plusMinusPane.setVisible(true);
+    addToOrder.setVisible(false);
 
-            // Notify MenuPageController to update totals
-            // if (menuPageController != null) {
-            // menuPageController.updateTotal();
-            // }
-            // return;
-        }
-
-        try {
-            // Load the FXML for a current order panel
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/currentOrder.fxml"));
-            currentOrderPane = loader.load();
-
-            // Get the controller for this order panel
-            currentOrderController = loader.getController();
-            currentOrderController.setData(
-                    mealName.getText(),
-                    Integer.parseInt(priceLabel.getText()),
-                    0, // start quantity at 0
-                    mealImage.getImage());
-
-            // Increment once for the initial add
-            currentOrderController.changeQuantity(1);
-
-            // Add the panel to the VBox
-            if (currentOrdersVBox != null) {
-                currentOrdersVBox.getChildren().add(currentOrderPane);
-                currentOrderPane.setUserData(currentOrderController); // <--- THIS
-            } else {
-                System.out.println("currentOrdersVBox is null!");
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    if (currentOrderController != null) {
+        currentOrderController.changeQuantity(1);
+        if (menuPageController != null) menuPageController.updateTotal();
+        return;
     }
 
-    @FXML
-    private void addMeal(ActionEvent event) {
-        if (currentOrderController != null) {
-            currentOrderController.changeQuantity(1);
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/currentOrder.fxml"));
+        currentOrderPane = loader.load();
+        currentOrderController = loader.getController();
+
+        currentOrderController.setData(
+                mealName.getText(),
+                Integer.parseInt(priceLabel.getText()),
+                0,
+                mealImage.getImage(),
+                mealId
+        );
+
+        // Increment once for the initial add
+        currentOrderController.changeQuantity(1);
+
+        // Add to VBox
+        if (currentOrdersVBox != null) {
+            currentOrdersVBox.getChildren().add(currentOrderPane);
+            currentOrderPane.setUserData(currentOrderController);
         }
+
+        // <-- Add this to update subtotal and total
+        if (menuPageController != null) {
+            menuPageController.updateTotal();
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 
     @FXML
-    private void remove(ActionEvent event) {
-        if (currentOrderController != null) {
-            currentOrderController.changeQuantity(-1);
-            if (currentOrderController.getQuantity() <= 0) {
-                currentOrdersVBox.getChildren().remove(currentOrderPane);
-                currentOrderController = null;
-                currentOrderPane = null;
-                plusMinusPane.setVisible(false);
-                addToOrder.setVisible(true);
-            }
+private void addMeal(ActionEvent event) {
+    if (currentOrderController != null) {
+        currentOrderController.changeQuantity(1);
+        if (menuPageController != null) {
+            menuPageController.updateTotal(); // Update subtotal whenever quantity changes
         }
     }
+}
+
+@FXML
+private void remove(ActionEvent event) {
+    if (currentOrderController != null) {
+        currentOrderController.changeQuantity(-1);
+
+        if (currentOrderController.getQuantity() <= 0) {
+            currentOrdersVBox.getChildren().remove(currentOrderPane);
+            currentOrderController = null;
+            currentOrderPane = null;
+            plusMinusPane.setVisible(false);
+            addToOrder.setVisible(true);
+        }
+
+        if (menuPageController != null) {
+            menuPageController.updateTotal(); // Update subtotal
+        }
+    }
+}
 
 }
