@@ -2,6 +2,8 @@ package com.laitte.Managers;
 
 import java.io.IOException;
 
+import com.laitte.Managers.SceneController;
+
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
