@@ -11,6 +11,12 @@
     font-weight: 800;
 }
 
+.scroll-pane,
+.scroll-pane>.viewport,
+.scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
 .middle-text {
     -fx-font-family: "Inter";
     -fx-font-style: italic;
@@ -94,4 +100,9 @@
     -fx-cursor: hand;
     -fx-pref-width: 150;
     -fx-alignment: center;
+}
+
+.blur-image {
+    filter: blur(18px);
+    /* Applies a 5-pixel Gaussian blur */
 }

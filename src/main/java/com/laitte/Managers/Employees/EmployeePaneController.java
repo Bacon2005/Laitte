@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class EmployeePaneController {
@@ -45,14 +46,19 @@ public class EmployeePaneController {
         deleteImage.setImage(new Image(getClass().getResourceAsStream("/Images/542724.png")));
     }
 
-    public void setData(String name, int id, String role, boolean isManager, String imagePath) {
+    public void setData(String name, int id, String role, boolean isManager, String imagePath) { // fix image
         employeeName.setText(name);
         employeeID.setText(String.valueOf(id)); // int to string
         roleName.setText(role);
         managerCheckBox.setSelected(isManager);
 
         if (imagePath != null && !imagePath.isEmpty()) {
-            employeePic.setImage(new Image(imagePath));
+            Circle clip = new Circle();
+            clip.radiusProperty().bind(employeePic.fitWidthProperty().divide(2));
+            clip.centerXProperty().bind(employeePic.fitWidthProperty().divide(2));
+            clip.centerYProperty().bind(employeePic.fitHeightProperty().divide(2));
+            employeePic.setClip(clip);
+            employeePic.setImage(new Image("/Images/ProfilePhotos/" + imagePath));
         } else {
             // Use default placeholder
             employeePic.setImage(
@@ -98,6 +104,7 @@ public class EmployeePaneController {
 
             // Open confirm window
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setScene(new Scene(root));
             stage.setTitle("Confirm Delete");
             stage.show();
