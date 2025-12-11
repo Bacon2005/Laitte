@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.MenupageController">
+   <children>
+
+                              <!-- extra decorations or logos kept as-is -->
+      <ImageView fitHeight="487.0" fitWidth="394.0" layoutX="-37.0" layoutY="-141.0" pickOnBounds="true" preserveRatio="true" rotate="-68.2">
+         <image>
+            <Image url="@../../Images/Leaves.png" />
+         </image>
+      </ImageView>
+
+      <!-- ScrollPane for Menu Items (center) -->
+      <HBox layoutX="60.0" layoutY="234.0" prefHeight="447.0" prefWidth="699.0">
+         <children>
+            <ScrollPane fx:id="scrollPaneMenu" prefHeight="420.0" prefWidth="910.0" style="-fx-background-insets: 0; -fx-padding: 0;" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="vboxMenuItems" focusTraversable="true" spacing="20.0" style="-fx-background-color: transparent;" />
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+
+      <!-- Menu Title & ComboBoxes -->
+      <Pane layoutX="51.0" layoutY="134.0" prefHeight="73.0" prefWidth="167.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 20;">
+         <children>
+            <Pane layoutX="9.0" layoutY="10.0" prefHeight="53.0" prefWidth="150.0" style="-fx-background-color: White; -fx-background-radius: 15;">
+               <children>
+                  <Label layoutX="21.0" layoutY="-2.0" text="Menu">
+                     <font><Font name="System Bold" size="40.0" /></font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+
+      <ComboBox fx:id="mealType" layoutX="240.0" layoutY="156.0" prefHeight="25.0" prefWidth="105.0" promptText="Meal Type" />
+      <ComboBox fx:id="mealCategory" layoutX="365.0" layoutY="157.0" prefHeight="25.0" prefWidth="122.0" promptText="Meal Category" />
+
+      <!-- Right side panel -->
+      <Pane layoutX="825.0" layoutY="-11.0" prefHeight="746.0" prefWidth="264.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3);" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="25.0" layoutY="670.0" prefHeight="43.0" prefWidth="221.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="Place Order">
+               <font><Font size="20.0" /></font>
+            </Button>
+
+            <!-- EDIT ORDERS button now has fx:id -->
+            <Button fx:id="editOrdersButton" contentDisplay="RIGHT" layoutX="93.0" layoutY="19.0" prefHeight="43.0" prefWidth="149.0" style="-fx-background-radius: 20; -fx-background-color: White;" text="EDIT ORDERS">
+               <font><Font name="System Bold" size="14.0" /></font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image><Image url="@../../Images/Icons/Edit%20(Button).png" /></image>
+                  </ImageView>
+               </graphic>
+            </Button>
+
+            <AnchorPane layoutX="24.0" layoutY="496.0" prefHeight="159.0" prefWidth="220.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 25;">
+               <children>
+                  <HBox prefHeight="26.0" prefWidth="195.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="118.0">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="112.0" text="Total Amount" HBox.hgrow="ALWAYS">
+                           <font><Font name="System Bold" size="16.0" /></font>
+                        </Label>
+                        <Region prefHeight="26.0" prefWidth="22.0" />
+                        <!-- totalAmountLabel used by controller -->
+                        <Label fx:id="totalAmountLabel" prefHeight="25.0" prefWidth="72.0" text="₱0.00" HBox.hgrow="ALWAYS">
+                           <font><Font name="System Bold" size="16.0" /></font>
+                        </Label>
+                     </children>
+                  </HBox>
+
+                  <ScrollPane hbarPolicy="NEVER" layoutX="4.0" layoutY="20.0" prefHeight="83.0" prefWidth="213.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="20.0">
+                     <content>
+                        <VBox prefHeight="399.0" prefWidth="213.0" spacing="10.0">
+                           <!-- (This area intentionally left blank — we only use the lower scrollpane for selected items) -->
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+
+            <HBox layoutX="29.0" layoutY="79.0" prefHeight="400.0" prefWidth="212.0" spacing="10.0">
+               <children>
+                  <ScrollPane prefHeight="348.0" prefWidth="260.0">
+                     <content>
+                        <!-- This is the vbox that will receive EditOrder cards -->
+                        <VBox fx:id="vboxSelectedItems" prefHeight="739.0" prefWidth="210.0" spacing="10.0" style="-fx-background-color: transparent;">
+                           <!-- items added dynamically -->
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <ImageView fitHeight="77.0" fitWidth="182.0" layoutX="25.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image><Image url="@../../Images/Logo.png" /></image>
+      </ImageView>
+      <AnchorPane fx:id="slider" layoutX="10.0" layoutY="10.0" prefHeight="733.0" prefWidth="200.0" stylesheets="@../../CSS/stylesheet.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="733.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom,  #FCE6CC,  #4B2A11,  #010302);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="195.0" prefHeight="30.0" prefWidth="203.0" text="Hello, User" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="profilePic" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-pic">
+                     <image>
+                        <Image url="@../../Images/7982ca49-c790-4282-8b82-ede6a2d33aac.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="50.0" fitWidth="83.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/Logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <VBox alignment="TOP_CENTER" layoutX="69.0" layoutY="248.0" prefHeight="492.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
+               <children>
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#homeBtn" prefHeight="36.0" prefWidth="200.0" styleClass="my-button" text=" Home">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Home%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="menu" mnemonicParsing="false" onAction="#menuBtn" prefHeight="35.0" prefWidth="200.0" styleClass="current-page-button" text=" Menu">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Menu%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="orders" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Orders">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Order%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#inventoryBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Inventory">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Inventory%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="analytics" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text=" Analytics">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Analytics%20Button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="Accounts" mnemonicParsing="false" onAction="#AccountsBtn" prefHeight="35.0" prefWidth="200.0" styleClass="my-button" text="Accounts">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/LogoCafe.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <HBox layoutX="20.0" layoutY="631.0" prefHeight="81.0" prefWidth="161.0" spacing="35.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="631.0">
+               <children>
+                  <Button fx:id="settingBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/Icon%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="60.0" prefWidth="60.0" styleClass="setting-logout-button">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../../Images/Log%20out.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.laitte.LaitteMain.Database;
+import com.laitte.Managers.SceneController;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;

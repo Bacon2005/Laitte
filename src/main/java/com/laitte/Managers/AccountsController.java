@@ -6,7 +6,6 @@ import java.util.List;
 import com.laitte.Managers.Employees.Employee;
 import com.laitte.Managers.Employees.EmployeeDAO;
 import com.laitte.Managers.Employees.EmployeePaneController;
-
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

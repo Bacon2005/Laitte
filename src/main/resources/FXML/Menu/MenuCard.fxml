@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="220.0" prefWidth="680.0" style="-fx-background-color: linear-gradient(to bottom, #3BB38E, #C0CFB3); -fx-background-radius: 50; -fx-border-color: #ddd;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.laitte.Managers.MenuCardController">
+    <effect>
+        <DropShadow color="#88888855" offsetX="2" offsetY="2" radius="5" />
+    </effect>
+   <children>
+      <AnchorPane layoutX="73.0" layoutY="22.666666666666664" prefHeight="181.0" prefWidth="445.0" style="-fx-background-color: white; -fx-background-radius: 50;" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="21.0">
+         <effect>
+            <DropShadow color="#88888855" offsetX="2" offsetY="2" radius="5" />
+         </effect>
+         <children>
+            <Label layoutX="24.0" layoutY="14.0" text="Fruit Oat Pancakes">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="47.0" prefHeight="58.0" prefWidth="388.0" text="Fluffy pancakes made with oats, bananas, blueberries, and strawberries." wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="109.0" text="₱325" textFill="#104b3b">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="307.0" layoutY="111.0" text="Breakfast">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="AddDish" contentDisplay="RIGHT" layoutX="141.0" layoutY="128.0" prefHeight="20.0" prefWidth="141.0" style="-fx-background-radius: 50; -fx-background-color: CFCCCC;" text="Add to Dish">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="32.0" fitWidth="31.0" layoutX="269.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/Icons/Veg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="31.0" layoutX="380.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/Icons/Breakfast.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="22.666666666666664" layoutY="22.666666666666664" prefHeight="181.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 50;" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="21.0">
+         <effect>
+            <DropShadow color="#88888855" offsetX="2" offsetY="2" radius="5" />
+         </effect>
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="140.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/Menu/Banana%20Oatmeal%20Pancakes.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

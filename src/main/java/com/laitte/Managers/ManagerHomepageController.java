@@ -2,6 +2,8 @@ package com.laitte.Managers;
 
 import java.io.IOException;
 
+import com.laitte.Managers.SceneController;
+
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -101,6 +103,11 @@ public class ManagerHomepageController {
     @FXML
     private void ordersBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/OrdersPage/OrderPageManagerView.fxml", null); // Switch to Orders
+    }
+
+     @FXML
+    private void menuBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/Menu/MenuPage.fxml", null); // Switch to Menu
     }
     // -----------------------------------------------------------------------//
 
