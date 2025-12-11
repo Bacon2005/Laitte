@@ -112,18 +112,15 @@ public class ManagerHomepageController {
     }
 
     @FXML
-    private void menuBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
+    private void analytics(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
     }
 
-    @FXML
-    private void settingsBtn(ActionEvent event) throws IOException {
-        SceneController.switchScene(event, "/FXML/SettingsPage/Settings.fxml", null); // Switch to Settings
-    }
     // -----------------------------------------------------------------------//
 
     @FXML
     private void notificationBtn(ActionEvent event) {
         notificationPane.setVisible(!notificationPane.isVisible());
     }
+
 }

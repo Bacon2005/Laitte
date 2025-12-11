@@ -271,6 +271,12 @@ public class OrderPageController {
     private void homeBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/Homepage/Homepage.fxml", null); // Switch to home
     }
+
+    @FXML
+    private void analytics(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
+    }
+    
     // -------------------------------------------------------------------//
 
     private void loadOrders() {

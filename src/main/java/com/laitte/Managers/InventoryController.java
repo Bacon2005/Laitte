@@ -137,26 +137,32 @@ public class InventoryController {
 
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
+        inventoryTable.setRowFactory(tableView -> {
+        TableRow<Item> row = new TableRow<>();
 
-        // for select and deselect
-        inventoryTable.setRowFactory(tableView -> { // setRowFactory are basically additional istruction for the rows,
-                                                    // allows for customization (hey give me a row to display)
-            TableRow<Item> row = new TableRow<>(); // creating single row object (heres a row object i made)
+        // Listen for data changes (low stock logic)
+        row.itemProperty().addListener((obs, oldItem, newItem) -> {
+        updateRowStyle(row, newItem);
+        });
 
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getClickCount() == 2) { // single click only
-                    int index = row.getIndex(); /*
-                                                 * (Hey TableView, I clicked the row at position 3 — do something with
-                                                 * that row)
-                                                 */
-                    if (row.isSelected()) {
-                        // clicked again twice to deselect
-                        inventoryTable.getSelectionModel().clearSelection(index);
-                    }
-                }
-            });
-            return row;
-        }); // (this is the row you actually use )
+        // Listen for selection changes (selected highlight)
+        row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+        updateRowStyle(row, row.getItem());
+        });
+
+        // Double-click to deselect
+        row.setOnMouseClicked(event -> {
+        if (!row.isEmpty() && event.getClickCount() == 2) {
+            int index = row.getIndex();
+            if (row.isSelected()) {
+                inventoryTable.getSelectionModel().clearSelection(index);
+            }
+        }
+    });
+
+    return row;
+});
+
     }
 
     // for adding items
@@ -215,8 +221,7 @@ public class InventoryController {
         }
     }
 
-    // ----------------------------Navigation
-    // buttons------------------------------------//
+    // ----------------------------Navigation buttons------------------------------------//
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
@@ -238,6 +243,8 @@ public class InventoryController {
     }
 
     @FXML
+    private void analytics(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null); // Switch to Orders
     private void menuBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/MenuPage.fxml", null); // Switch to Menu
     }
@@ -284,7 +291,27 @@ public class InventoryController {
             inventoryTable.setItems(list); // this will work if tableView is properly initialized
 
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+            e.printStackTrace();}}
+
+    //for the red highlight for low inventorury
+            private void updateRowStyle(TableRow<Item> row, Item item) {
+    if (item == null) {
+        row.setStyle("");
+        return;
     }
+
+    // If selected → ALWAYS green
+    if (row.isSelected()) {
+        row.setStyle("-fx-background-color: #3FB38E;");
+        return;
+    }
+
+    // Low stock highlight
+    if (item.getStockAvailable() <= 20) {
+        row.setStyle("-fx-background-color: #ed9595ff;");
+    } else {
+        row.setStyle("-fx-background-color: white;");
+    }
+}
+
 }
