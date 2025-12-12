@@ -138,30 +138,30 @@ public class InventoryController {
         // 2. Hover OUTSIDE sidebar → slide OUT
         slider.setOnMouseExited(event -> slideOut.play());
         inventoryTable.setRowFactory(tableView -> {
-        TableRow<Item> row = new TableRow<>();
+            TableRow<Item> row = new TableRow<>();
 
-        // Listen for data changes (low stock logic)
-        row.itemProperty().addListener((obs, oldItem, newItem) -> {
-        updateRowStyle(row, newItem);
+            // Listen for data changes (low stock logic)
+            row.itemProperty().addListener((obs, oldItem, newItem) -> {
+                updateRowStyle(row, newItem);
+            });
+
+            // Listen for selection changes (selected highlight)
+            row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+                updateRowStyle(row, row.getItem());
+            });
+
+            // Double-click to deselect
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 2) {
+                    int index = row.getIndex();
+                    if (row.isSelected()) {
+                        inventoryTable.getSelectionModel().clearSelection(index);
+                    }
+                }
+            });
+
+            return row;
         });
-
-        // Listen for selection changes (selected highlight)
-        row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-        updateRowStyle(row, row.getItem());
-        });
-
-        // Double-click to deselect
-        row.setOnMouseClicked(event -> {
-        if (!row.isEmpty() && event.getClickCount() == 2) {
-            int index = row.getIndex();
-            if (row.isSelected()) {
-                inventoryTable.getSelectionModel().clearSelection(index);
-            }
-        }
-    });
-
-    return row;
-});
 
     }
 
@@ -221,7 +221,8 @@ public class InventoryController {
         }
     }
 
-    // ----------------------------Navigation buttons------------------------------------//
+    // ----------------------------Navigation
+    // buttons------------------------------------//
     @FXML
     private void logoutBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/LoginScene.fxml", null); // Switch to Login Scene
@@ -258,8 +259,8 @@ public class InventoryController {
     }
 
     @FXML
-    private void analyticsBtn(ActionEvent event) throws IOException{
-        SceneController.switchScene(event, "/FXML/AnalyticasPage.fxml", null);
+    private void analyticsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null);
     }
 
     // --------------------------------------------------------------------------//
@@ -294,27 +295,29 @@ public class InventoryController {
             inventoryTable.setItems(list); // this will work if tableView is properly initialized
 
         } catch (Exception e) {
-            e.printStackTrace();}}
-
-    //for the red highlight for low inventorury
-            private void updateRowStyle(TableRow<Item> row, Item item) {
-    if (item == null) {
-        row.setStyle("");
-        return;
+            e.printStackTrace();
+        }
     }
 
-    // If selected → ALWAYS green
-    if (row.isSelected()) {
-        row.setStyle("-fx-background-color: #3FB38E;");
-        return;
-    }
+    // for the red highlight for low inventorury
+    private void updateRowStyle(TableRow<Item> row, Item item) {
+        if (item == null) {
+            row.setStyle("");
+            return;
+        }
 
-    // Low stock highlight
-    if (item.getStockAvailable() <= 20) {
-        row.setStyle("-fx-background-color: #ed9595ff;");
-    } else {
-        row.setStyle("-fx-background-color: white;");
+        // If selected → ALWAYS green
+        if (row.isSelected()) {
+            row.setStyle("-fx-background-color: #3FB38E;");
+            return;
+        }
+
+        // Low stock highlight
+        if (item.getStockAvailable() <= 20) {
+            row.setStyle("-fx-background-color: #ed9595ff;");
+        } else {
+            row.setStyle("-fx-background-color: white;");
+        }
     }
-}
 
 }

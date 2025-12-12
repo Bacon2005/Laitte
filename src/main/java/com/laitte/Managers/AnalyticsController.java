@@ -11,8 +11,11 @@ import java.util.List;
 import com.laitte.LaitteMain.Database;
 
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -31,37 +34,65 @@ import javafx.scene.chart.NumberAxis;
 
 public class AnalyticsController {
 
-     // --------------------------- Variables for FXML ----------------------------//
-    @FXML private Button Accounts;
-    @FXML private Button analytics;
-    @FXML private AnchorPane ancpnMealImg;
-    @FXML private LineChart<String, Number> chLineChart;
-    @FXML private DatePicker datepicker;
-    @FXML private Button home;
-    @FXML private Button inventory;
-    @FXML private Label labelAvgRevOrder;
-    @FXML private Label labelGrossRev;
-    @FXML private Label labelMealCategory;
-    @FXML private Label labelCancelledOrders;
-    @FXML private Label labelMealDescription;
-    @FXML private Label labelMealID;
-    @FXML private Label labelMealName;
-    @FXML private Label labelMealPrice;
-    @FXML private Label labelMealType;
-    @FXML private Label labelNewCustomers;
-    @FXML private Label labelOrdersCompleted;
-    @FXML private Button logoutBtn;
-    @FXML private Button menu;
-    @FXML private Label nameLabel;
-    @FXML private Button orders;
-    @FXML private ImageView profilePic;
-    @FXML private Button settingBtn;
-    @FXML private AnchorPane slider;
-    @FXML private AnchorPane rootPane;
-    @FXML private TableView<MealSales> salesTable;
-    @FXML private TableColumn<MealSales, String> colMealName;
-    @FXML private TableColumn<MealSales, Integer> colMealSales;
-
+    // --------------------------- Variables for FXML ----------------------------//
+    @FXML
+    private Button Accounts;
+    @FXML
+    private Button analytics;
+    @FXML
+    private AnchorPane ancpnMealImg;
+    @FXML
+    private LineChart<String, Number> chLineChart;
+    @FXML
+    private DatePicker datepicker;
+    @FXML
+    private Button home;
+    @FXML
+    private Button inventory;
+    @FXML
+    private Label labelAvgRevOrder;
+    @FXML
+    private Label labelGrossRev;
+    @FXML
+    private Label labelMealCategory;
+    @FXML
+    private Label labelCancelledOrders;
+    @FXML
+    private Label labelMealDescription;
+    @FXML
+    private Label labelMealID;
+    @FXML
+    private Label labelMealName;
+    @FXML
+    private Label labelMealPrice;
+    @FXML
+    private Label labelMealType;
+    @FXML
+    private Label labelNewCustomers;
+    @FXML
+    private Label labelOrdersCompleted;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Button menu;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Button orders;
+    @FXML
+    private ImageView profilePic;
+    @FXML
+    private Button settingBtn;
+    @FXML
+    private AnchorPane slider;
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private TableView<MealSales> salesTable;
+    @FXML
+    private TableColumn<MealSales, String> colMealName;
+    @FXML
+    private TableColumn<MealSales, Integer> colMealSales;
 
     public TableRow<Item> initialize() {
         // ----------------------------- Slide thing -----------------------------//
@@ -103,51 +134,51 @@ public class AnalyticsController {
         slider.setOnMouseExited(event -> slideOut.play());
         nameLabel.setText("Hello, " + Session.getFirstname()); // Set username from session
 
-        // ----------------------------- When you pick date -----------------------------//
+        // ----------------------------- When you pick date
+        // -----------------------------//
         datepicker.setOnAction(event -> {
-        LocalDate selectedDate = datepicker.getValue();
-        if (selectedDate != null) {
-        updateLineChart(selectedDate);
-        updateGrossRevenue(selectedDate);
-        updateOrdersCompleted(selectedDate);
-        updateAvgRevPerOrder(selectedDate);
-        updateDeletedOrders(selectedDate);
-        updateSalesTable(selectedDate);
-        }});
+            LocalDate selectedDate = datepicker.getValue();
+            if (selectedDate != null) {
+                updateLineChart(selectedDate);
+                updateGrossRevenue(selectedDate);
+                updateOrdersCompleted(selectedDate);
+                updateAvgRevPerOrder(selectedDate);
+                updateDeletedOrders(selectedDate);
+                updateSalesTable(selectedDate);
+            }
+        });
 
-        // ----------------------------- Something for Y Axis -----------------------------//
+        // ----------------------------- Something for Y Axis
+        // -----------------------------//
         NumberAxis yAxis = (NumberAxis) chLineChart.getYAxis();
-        yAxis.setTickUnit(1);          // each tick = 1
-        yAxis.setMinorTickCount(0);   // no minor ticks
+        yAxis.setTickUnit(1); // each tick = 1
+        yAxis.setMinorTickCount(0); // no minor ticks
 
-
-        // ----------------------------- Column highest lowest -----------------------------//
+        // ----------------------------- Column highest lowest
+        // -----------------------------//
 
         colMealName.setCellValueFactory(new PropertyValueFactory<>("mealName"));
         colMealSales.setCellValueFactory(new PropertyValueFactory<>("sales"));
 
-
-
         salesTable.setRowFactory(tableView -> {
-        TableRow<MealSales> row = new TableRow<>(); // match the TableView's type
+            TableRow<MealSales> row = new TableRow<>(); // match the TableView's type
 
-        row.setOnMouseClicked(event -> {
-        if (!row.isEmpty() && event.getClickCount() == 2) { // double click
-            int index = row.getIndex();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 2) { // double click
+                    int index = row.getIndex();
 
-            if (row.isSelected()) {
-                // clicked again twice to deselect
-                salesTable.getSelectionModel().clearSelection(index);
-            }
-        }
+                    if (row.isSelected()) {
+                        // clicked again twice to deselect
+                        salesTable.getSelectionModel().clearSelection(index);
+                    }
+                }
+            });
+
+            return row; // returns TableRow<MealSales>
         });
 
-        return row; // returns TableRow<MealSales>
-        });
-        
         return null;
     }
-
 
     // ----------------------------- Navigation -----------------------------//
     // Navigation methods are defined outside initialize()
@@ -187,195 +218,210 @@ public class AnalyticsController {
     }
 
     @FXML
-    private void analyticsBtn(ActionEvent event) throws IOException{
-        SceneController.switchScene(event, "/FXML/AnalyticasPage.fxml", null);
+    private void analyticsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null);
     }
 
-
-    // -------------------------- for line chart ---------------------------------------------//
+    // -------------------------- for line chart
+    // ---------------------------------------------//
     private void updateLineChart(LocalDate date) {
-    chLineChart.getData().clear();
+        chLineChart.getData().clear();
 
-    XYChart.Series<String, Number> series = new XYChart.Series<>();
-    series.setName("Items Sold");
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Items Sold");
 
-    // Join sales with meal to get meal names
-    String sql = """
-            SELECT m.mealname, COUNT(a.analyticsid) AS total
-        FROM analytics a
-        JOIN meal m ON a.mealid = m.mealid
-        WHERE a.transactiondate = ?
-        GROUP BY m.mealname
-            """;
+        String sql = """
+                SELECT m.mealname, COUNT(a.analyticsid) AS total
+                FROM analytics a
+                JOIN meal m ON a.mealid = m.mealid
+                WHERE a.transactiondate = ?
+                GROUP BY m.mealname
+                """;
 
-    try (Connection conn = Database.connect();
-         PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.connect();
+                PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setDate(1, java.sql.Date.valueOf(date));
-        ResultSet rs = pst.executeQuery();
+            pst.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet rs = pst.executeQuery();
 
-        while (rs.next()) {
-            String mealName = rs.getString("mealname");
-            int total = rs.getInt("total");
-            series.getData().add(new XYChart.Data<>(mealName, total));
+            // Force ALL labels to appear
+            ObservableList<String> categories = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                String mealName = rs.getString("mealname");
+                int total = rs.getInt("total");
+
+                categories.add(mealName);
+                series.getData().add(new XYChart.Data<>(mealName, total));
+            }
+
+            chLineChart.getData().add(series);
+
+            // Configure X axis to show ALL categories
+            CategoryAxis xAxis = (CategoryAxis) chLineChart.getXAxis();
+            xAxis.setCategories(categories); // ← IMPORTANT
+            xAxis.setTickLabelRotation(90);
+            xAxis.setTickLabelsVisible(true);
+            xAxis.setTickMarkVisible(true);
+            xAxis.setAnimated(false);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        chLineChart.getData().add(series);
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
 
-    // -------------------------- gross revenue ---------------------------------------------//
+    // -------------------------- gross revenue
+    // ---------------------------------------------//
     private void updateGrossRevenue(LocalDate date) {
-    String sql = "SELECT SUM(m.mealprice) AS total_revenue " +
-                 "FROM analytics a " +
-                 "JOIN meal m ON a.mealid = m.mealid " +
-                 "WHERE a.transactiondate = ?";
+        String sql = "SELECT SUM(m.mealprice) AS total_revenue " +
+                "FROM analytics a " +
+                "JOIN meal m ON a.mealid = m.mealid " +
+                "WHERE a.transactiondate = ?";
 
-    try (Connection conn = Database.connect();
-         PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.connect();
+                PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setDate(1, java.sql.Date.valueOf(date));
-        ResultSet rs = pst.executeQuery();
+            pst.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            double total = rs.getDouble("total_revenue");
-            labelGrossRev.setText("₱ " + total);
-        } else {
+            if (rs.next()) {
+                double total = rs.getDouble("total_revenue");
+                labelGrossRev.setText("₱ " + total);
+            } else {
+                labelGrossRev.setText("₱ 0");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
             labelGrossRev.setText("₱ 0");
         }
+    }
 
-    } catch (Exception e) {
-        e.printStackTrace();
-        labelGrossRev.setText("₱ 0");
-    }}
-
-
-    // -------------------------------orders completed ----------------------------------------//
+    // -------------------------------orders completed
+    // ----------------------------------------//
     private void updateOrdersCompleted(LocalDate date) {
-    String sql = "SELECT COUNT(*) AS total FROM analytics WHERE transactiondate = ?";
+        String sql = "SELECT COUNT(*) AS total FROM analytics WHERE transactiondate = ?";
 
-    try (Connection conn = Database.connect();
-         PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.connect();
+                PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setDate(1, java.sql.Date.valueOf(date));
-        ResultSet rs = pst.executeQuery();
+            pst.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            int total = rs.getInt("total");
-            labelOrdersCompleted.setText(String.valueOf(total));
-        } else {
+            if (rs.next()) {
+                int total = rs.getInt("total");
+                labelOrdersCompleted.setText(String.valueOf(total));
+            } else {
+                labelOrdersCompleted.setText("0");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
             labelOrdersCompleted.setText("0");
         }
+    }
 
-    } catch (Exception e) {
-        e.printStackTrace();
-        labelOrdersCompleted.setText("0");
-    }}
-
-
-    // ---------------------------------Ave revenue per order--------------------------------------//
+    // ---------------------------------Ave revenue per
+    // order--------------------------------------//
     private void updateAvgRevPerOrder(LocalDate date) {
-    String sqlRevenue = "SELECT SUM(m.mealprice) AS total_revenue " +
-                        "FROM analytics a " +
-                        "JOIN meal m ON a.mealid = m.mealid " +
-                        "WHERE a.transactiondate = ?";
+        String sqlRevenue = "SELECT SUM(m.mealprice) AS total_revenue " +
+                "FROM analytics a " +
+                "JOIN meal m ON a.mealid = m.mealid " +
+                "WHERE a.transactiondate = ?";
 
-    String sqlOrders = "SELECT COUNT(*) AS total FROM analytics WHERE transactiondate = ?";
+        String sqlOrders = "SELECT COUNT(*) AS total FROM analytics WHERE transactiondate = ?";
 
-    try (Connection conn = Database.connect()) {
+        try (Connection conn = Database.connect()) {
 
-        double totalRevenue = 0;
-        // Total revenue
-        try (PreparedStatement pst = conn.prepareStatement(sqlRevenue)) {
-            pst.setDate(1, java.sql.Date.valueOf(date));
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                totalRevenue = rs.getDouble("total_revenue");
+            double totalRevenue = 0;
+            // Total revenue
+            try (PreparedStatement pst = conn.prepareStatement(sqlRevenue)) {
+                pst.setDate(1, java.sql.Date.valueOf(date));
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalRevenue = rs.getDouble("total_revenue");
+                }
             }
-        }
 
-        int totalOrders = 0;
-        // Total orders
-        try (PreparedStatement pst = conn.prepareStatement(sqlOrders)) {
-            pst.setDate(1, java.sql.Date.valueOf(date));
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                totalOrders = rs.getInt("total"); // <-- use "total" here
+            int totalOrders = 0;
+            // Total orders
+            try (PreparedStatement pst = conn.prepareStatement(sqlOrders)) {
+                pst.setDate(1, java.sql.Date.valueOf(date));
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalOrders = rs.getInt("total"); // <-- use "total" here
+                }
             }
+
+            // Calculate average revenue per order
+            double avgRevenue = totalOrders > 0 ? totalRevenue / totalOrders : 0; // checks ig naay order, if true then
+                                                                                  // yeah if false 0
+
+            labelAvgRevOrder.setText(String.format("%.2f", avgRevenue)); // double decimal places
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            labelAvgRevOrder.setText("0");
         }
+    }
 
-        // Calculate average revenue per order
-        double avgRevenue = totalOrders > 0 ? totalRevenue / totalOrders : 0;       //checks ig naay order, if true then yeah if false 0
-
-        labelAvgRevOrder.setText(String.format("%.2f", avgRevenue));        // double decimal places
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        labelAvgRevOrder.setText("0");}}
-
-
-    // ----------------------------------Deleted Orders------------------------------------//
+    // ----------------------------------Deleted
+    // Orders------------------------------------//
     private void updateDeletedOrders(LocalDate date) {
-    String sql = "SELECT COUNT(*) AS total_cancelled " +
-                 "FROM orders o " +
-                 "JOIN analytics a ON o.analyticsid = a.analyticsid " +
-                 "WHERE a.transactiondate = ? AND o.iscancelled = TRUE";
+        String sql = "SELECT COUNT(*) AS total_cancelled " +
+                "FROM orders o " +
+                "JOIN analytics a ON o.analyticsid = a.analyticsid " +
+                "WHERE a.transactiondate = ? AND o.iscancelled = TRUE";
 
-    try (Connection conn = Database.connect();
-         PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.connect();
+                PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setDate(1, java.sql.Date.valueOf(date));
-        ResultSet rs = pst.executeQuery();
+            pst.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            int totalCancelled = rs.getInt("total_cancelled");
-            labelCancelledOrders.setText(String.valueOf(totalCancelled));
-        } else {
+            if (rs.next()) {
+                int totalCancelled = rs.getInt("total_cancelled");
+                labelCancelledOrders.setText(String.valueOf(totalCancelled));
+            } else {
+                labelCancelledOrders.setText("0");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
             labelCancelledOrders.setText("0");
         }
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        labelCancelledOrders.setText("0");
     }
-}
 
-
-        // ----------------------------------highest lowest shit thats gon make me sewerslide-----------------------------------//
+    // ----------------------------------highest lowest shit thats gon make me
+    // sewerslide-----------------------------------//
     private void updateSalesTable(LocalDate date) {
-    salesTable.getItems().clear();
+        salesTable.getItems().clear();
 
-    String sql =
-        "SELECT m.mealname, COALESCE(COUNT(a.analyticsid), 0) AS totalSales " +
-        "FROM meal m " +
-        "LEFT JOIN analytics a ON m.mealid = a.mealid AND a.transactiondate = ? " +
-        "GROUP BY m.mealname " +
-        "ORDER BY totalSales DESC";
+        String sql = "SELECT m.mealname, COALESCE(COUNT(a.analyticsid), 0) AS totalSales " +
+                "FROM meal m " +
+                "LEFT JOIN analytics a ON m.mealid = a.mealid AND a.transactiondate = ? " +
+                "GROUP BY m.mealname " +
+                "ORDER BY totalSales DESC";
 
-    try (Connection conn = Database.connect();
-         PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.connect();
+                PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        pst.setDate(1, java.sql.Date.valueOf(date));
-        ResultSet rs = pst.executeQuery();
+            pst.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet rs = pst.executeQuery();
 
-        List<MealSales> list = new ArrayList<>();
+            List<MealSales> list = new ArrayList<>();
 
-        while (rs.next()) {
-            list.add(new MealSales(
-                rs.getString("mealname"),
-                rs.getInt("totalSales")
-            ));
+            while (rs.next()) {
+                list.add(new MealSales(
+                        rs.getString("mealname"),
+                        rs.getInt("totalSales")));
+            }
+
+            salesTable.getItems().addAll(list);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        salesTable.getItems().addAll(list);
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-
 
 }

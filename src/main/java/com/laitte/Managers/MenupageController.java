@@ -136,7 +136,7 @@ public class MenupageController {
     }
 
     @FXML
-    private void analyticsBtn(ActionEvent event) throws IOException{
+    private void analyticsBtn(ActionEvent event) throws IOException {
         SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null);
     }
     // -----------------------------------------------------------------------//
@@ -228,56 +228,55 @@ public class MenupageController {
         totalPrice.setText(String.valueOf(subtotal + SERVICE_FEE)); // total = subtotal + service fee
     }
 
-   @FXML
-public void placeOrder(ActionEvent event) {
-    try {
-        // Load CustomerName.fxml
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Menu/CustomerName.fxml"));
-        Parent root = loader.load();
+    @FXML
+    public void placeOrder(ActionEvent event) {
+        try {
+            // Load CustomerName.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Menu/CustomerName.fxml"));
+            Parent root = loader.load();
 
-        // Create a new stage (modal)
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL); // Makes it modal
-        stage.setTitle("Enter Customer Name");
+            // Create a new stage (modal)
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); // Makes it modal
+            stage.setTitle("Enter Customer Name");
 
-        // Show the window and wait until it's closed
-        stage.showAndWait();
+            // Show the window and wait until it's closed
+            stage.showAndWait();
 
-        // Get customer name from session
-        String customerName = Session.getCustomerName();
-        if (customerName == null || customerName.isEmpty()) {
-            System.out.println("Customer name not provided. Order cancelled.");
-            return; // stop if no name
-        }
-
-        int employeeId = Session.getEmployeeId();
-
-        for (var node : currentOrdersVbox.getChildren()) {
-            if (node.getUserData() instanceof currentOrderPaneController) {
-                currentOrderPaneController orderController = (currentOrderPaneController) node.getUserData();
-                int mealId = orderController.getMealId();
-                int quantity = orderController.getQuantity();
-
-                // Insert into analytics and get analyticsid
-                int analyticsId = AnalyticsDAO.insertAnalytics(employeeId, mealId, java.time.LocalDate.now());
-
-                // Insert into orders
-                OrdersDAO.insertOrder(analyticsId, customerName, mealId, quantity, true, false);
+            // Get customer name from session
+            String customerName = Session.getCustomerName();
+            if (customerName == null || customerName.isEmpty()) {
+                System.out.println("Customer name not provided. Order cancelled.");
+                return; // stop if no name
             }
+
+            int employeeId = Session.getEmployeeId();
+
+            for (var node : currentOrdersVbox.getChildren()) {
+                if (node.getUserData() instanceof currentOrderPaneController) {
+                    currentOrderPaneController orderController = (currentOrderPaneController) node.getUserData();
+                    int mealId = orderController.getMealId();
+                    int quantity = orderController.getQuantity();
+
+                    // Insert into analytics and get analyticsid
+                    int analyticsId = AnalyticsDAO.insertAnalytics(employeeId, mealId, java.time.LocalDate.now());
+
+                    // Insert into orders
+                    OrdersDAO.insertOrder(analyticsId, customerName, mealId, quantity, true, false);
+                }
+            }
+
+            // Clear orders and update totals
+            currentOrdersVbox.getChildren().clear();
+            updateTotal();
+
+            System.out.println("Order placed successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        // Clear orders and update totals
-        currentOrdersVbox.getChildren().clear();
-        updateTotal();
-
-        System.out.println("Order placed successfully!");
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-    //Navigation
+    // Navigation
 
-    
 }

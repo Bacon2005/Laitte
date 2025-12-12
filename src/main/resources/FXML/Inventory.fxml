@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,20 +14,6 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1083.0" stylesheets="@../CSS/InventoryStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laitte.Managers.InventoryController">
    <children>
-      <AnchorPane fx:id="m_inventory_search_anchor" layoutX="617.0" layoutY="44.0" prefHeight="37.0" prefWidth="293.0" styleClass="m_inventory_search_anchor">
-         <children>
-            <TextField fx:id="m_inventory_search" layoutX="13.0" layoutY="7.0" prefHeight="37.0" prefWidth="234.0" promptText="Search..." styleClass="m_inventory_search">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </TextField>
-            <ImageView fitHeight="53.0" fitWidth="67.0" layoutX="245.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/Search.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
       <Label fx:id="inventory_title" layoutX="128.0" layoutY="52.0" text="INVENTORY MANAGEMENT">
          <font>
             <Font name="Avenir Black Oblique" size="23.0" />
@@ -185,6 +170,16 @@
                   </Button>
                </children>
             </HBox>
+         </children>
+      </AnchorPane>
+      <Button fx:id="m_inventory_delete" layoutX="825.0" layoutY="52.0" mnemonicParsing="false" onAction="#m_inventory_delete" prefHeight="35.0" prefWidth="98.0" styleClass="m_inventory_add" text="- Delete Item" />
+      <AnchorPane fx:id="noselected" layoutX="662.0" layoutY="53.0" prefHeight="31.0" prefWidth="137.0" style="-fx-background-color: #c5595975; -fx-border-color: #c55959;" visible="false">
+         <children>
+            <Label layoutX="10.0" layoutY="4.0" prefHeight="25.0" prefWidth="137.0" text="No row is selected" textFill="#e10000">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

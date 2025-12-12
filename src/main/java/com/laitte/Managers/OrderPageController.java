@@ -273,46 +273,47 @@ public class OrderPageController {
     }
 
     @FXML
-    private void analyticsBtn(ActionEvent event) throws IOException{
-        SceneController.switchScene(event, "/FXML/AnalytisPage.fxml", null);
+    private void analyticsBtn(ActionEvent event) throws IOException {
+        SceneController.switchScene(event, "/FXML/AnalyticsPage.fxml", null);
     }
     // -------------------------------------------------------------------//
 
     private void loadOrders() {
-    List<Orders> orders = OrdersDAO.getAllOrders();
+        List<Orders> orders = OrdersDAO.getAllOrders();
 
-    ordersVbox.getChildren().clear();
+        ordersVbox.getChildren().clear();
 
-    // Track which customers already have a panel
-    Set<String> loadedCustomers = new HashSet<>();
+        // Track which customers already have a panel
+        Set<String> loadedCustomers = new HashSet<>();
 
-    for (Orders ord : orders) {
+        for (Orders ord : orders) {
 
-        if (!ord.isPending()) continue; // Only pending orders
+            if (!ord.isPending())
+                continue; // Only pending orders
 
-        String customerKey = ord.getCustomer();
+            String customerKey = ord.getCustomer();
 
-        // Skip if we've already added a panel for this customer
-        if (loadedCustomers.contains(customerKey)) continue;
+            // Skip if we've already added a panel for this customer
+            if (loadedCustomers.contains(customerKey))
+                continue;
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/OrderList.fxml"));
-            AnchorPane pane = loader.load();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DuplicatingPanels/OrderList.fxml"));
+                AnchorPane pane = loader.load();
 
-            OrdersPaneController controller = loader.getController();
-            controller.setData(ord.getCustomer(), ord.getNum(), ord.isPending());
+                OrdersPaneController controller = loader.getController();
+                controller.setData(ord.getCustomer(), ord.getNum(), ord.isPending());
 
-            ordersVbox.getChildren().add(pane);
-            controller.setParentController(this);
+                ordersVbox.getChildren().add(pane);
+                controller.setParentController(this);
 
-            loadedCustomers.add(customerKey);
+                loadedCustomers.add(customerKey);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-}
-
 
     public void reloadOrders() {
         ordersVbox.getChildren().clear(); // clear existing order panes
